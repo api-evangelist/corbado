@@ -1,0 +1,60 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Corbado
+providerId: corbado
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Authentication
+- Passkeys
+- WebAuthn
+- Passwordless
+- CIAM
+- Identity
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Corbado does not publish explicit numeric rate limits for the Backend API.
+  As a multi-tenant authentication platform, requests are scoped per project
+  and authenticated with HTTP Basic auth (project ID + API secret); abusive
+  or excessive traffic is throttled and clients should expect HTTP 429
+  responses under load. Plan and usage are primarily metered by monthly active
+  users (MAU) rather than raw request rate. Specific per-endpoint limits are
+  not reconciled in this artifact.
+notes: >-
+  No public numeric limits are documented. Confirm any per-project request
+  ceilings, burst limits, and 429 behavior with Corbado support during
+  reconciliation.
+sources:
+- https://docs.corbado.com/api-reference/backend-api
+- https://docs.corbado.com/api-reference/authentication
+- https://www.corbado.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Backend API Requests
+  scope: project
+  metric: requests
+  limit: see provider documentation
+  notes: Per-project request throttling; explicit numeric ceiling not published.
+- name: Passkey Ceremonies
+  scope: project
+  metric: requests
+  limit: see provider documentation
+  notes: Append/login start and finish ceremonies; throttled to mitigate abuse.
+- name: Monthly Active Users (MAU)
+  scope: project
+  metric: monthly_active_users
+  limit: plan-dependent
+  notes: Primary metering dimension; tied to plan allotment, not a request rate.
+policies:
+- name: Per-Project Scoping
+  description: Limits and usage are scoped to a project identified by the project ID used in Basic auth.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on HTTP 429.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

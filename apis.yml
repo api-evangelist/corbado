@@ -1,0 +1,173 @@
+aid: corbado
+url: https://raw.githubusercontent.com/api-evangelist/corbado/refs/heads/main/apis.yml
+name: Corbado
+kind: company
+description: Corbado is a passkey-first authentication platform that helps companies
+  add WebAuthn passkeys to their products. The Corbado Backend API manages users,
+  login identifiers, sessions, passkeys/credentials, and connect tokens, while passkey
+  intelligence and analytics surface readiness, adoption, and per-user debugging for
+  passwordless rollouts.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Authentication
+- Passkeys
+- WebAuthn
+- Passwordless
+- CIAM
+- Identity
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: corbado:corbado-users-api
+  name: Corbado Users API
+  tags:
+  - Users
+  - Identity
+  - CIAM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  properties:
+  - url: https://docs.corbado.com/api-reference/backend-api
+    type: Documentation
+  - url: https://docs.corbado.com/api-reference/backend-api/users
+    type: APIReference
+  - url: openapi/corbado-openapi.yml
+    type: OpenAPI
+  - url: collections/corbado.postman_collection.json
+    type: PostmanCollection
+  - url: collections/corbado.opencollection.json
+    type: OpenCollection
+  description: Create, list, retrieve, update, and delete end users, plus manage their
+    social logins and credentials, in the Corbado Backend API.
+- aid: corbado:corbado-identifiers-api
+  name: Corbado Identifiers API
+  tags:
+  - Identifiers
+  - Email
+  - Phone
+  - Username
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  properties:
+  - url: https://docs.corbado.com/api-reference/backend-api/identifiers
+    type: Documentation
+  - url: https://docs.corbado.com/api-reference/backend-api/identifiers
+    type: APIReference
+  - url: openapi/corbado-openapi.yml
+    type: OpenAPI
+  - url: collections/corbado.postman_collection.json
+    type: PostmanCollection
+  - url: collections/corbado.opencollection.json
+    type: OpenCollection
+  description: Manage login identifiers (email, phone, username) attached to a user,
+    including create, update, delete, and list operations across the project.
+- aid: corbado:corbado-sessions-api
+  name: Corbado Sessions API
+  tags:
+  - Sessions
+  - JWT
+  - Authentication
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  properties:
+  - url: https://docs.corbado.com/api-reference/backend-api/sessions
+    type: Documentation
+  - url: https://docs.corbado.com/api-reference/backend-api/sessions
+    type: APIReference
+  - url: openapi/corbado-openapi.yml
+    type: OpenAPI
+  - url: collections/corbado.postman_collection.json
+    type: PostmanCollection
+  - url: collections/corbado.opencollection.json
+    type: OpenCollection
+  description: List active authentication sessions and revoke individual sessions to
+    terminate a user's authenticated state server-side.
+- aid: corbado:corbado-passkeys-api
+  name: Corbado Passkeys API
+  tags:
+  - Passkeys
+  - WebAuthn
+  - Credentials
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  properties:
+  - url: https://docs.corbado.com/api-reference/backend-api/passkeys
+    type: Documentation
+  - url: https://docs.corbado.com/api-reference/backend-api/passkeys
+    type: APIReference
+  - url: openapi/corbado-openapi.yml
+    type: OpenAPI
+  - url: collections/corbado.postman_collection.json
+    type: PostmanCollection
+  - url: collections/corbado.opencollection.json
+    type: OpenCollection
+  description: WebAuthn passkey ceremonies - append (registration) and login start/finish,
+    conditional UI mediation, signed-data verification - plus listing and deleting
+    a user's passkey credentials.
+- aid: corbado:corbado-connect-tokens-api
+  name: Corbado Connect Tokens API
+  tags:
+  - Connect Tokens
+  - Auth Tokens
+  - Corbado Connect
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  properties:
+  - url: https://docs.corbado.com/api-reference/backend-api/connect-tokens
+    type: Documentation
+  - url: https://docs.corbado.com/api-reference/backend-api/connect-tokens
+    type: APIReference
+  - url: openapi/corbado-openapi.yml
+    type: OpenAPI
+  - url: collections/corbado.postman_collection.json
+    type: PostmanCollection
+  - url: collections/corbado.opencollection.json
+    type: OpenCollection
+  description: Create, list, update, and delete short-lived Connect tokens that authorize
+    Corbado Connect frontend passkey management flows on behalf of a known user.
+- aid: corbado:corbado-projects-api
+  name: Corbado Projects API
+  tags:
+  - Projects
+  - Configuration
+  - Exports
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  properties:
+  - url: https://docs.corbado.com/api-reference/backend-api
+    type: Documentation
+  - url: https://docs.corbado.com/api-reference/backend-api
+    type: APIReference
+  - url: openapi/corbado-openapi.yml
+    type: OpenAPI
+  - url: collections/corbado.postman_collection.json
+    type: PostmanCollection
+  - url: collections/corbado.opencollection.json
+    type: OpenCollection
+  description: Project-level configuration and data exports, including CNAME configuration
+    and downloadable project exports for users and passkey events.
+common:
+- type: GitHubOrganization
+  url: https://github.com/corbado
+- type: LinkedIn
+  url: https://www.linkedin.com/company/corbado
+- type: Website
+  url: https://www.corbado.com
+- type: Documentation
+  url: https://docs.corbado.com
+- type: Plans
+  url: plans/corbado-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/corbado-rate-limits.yml
+- type: FinOps
+  url: finops/corbado-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,126 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Corbado
+providerId: corbado
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Authentication
+- Passkeys
+- WebAuthn
+- Passwordless
+- CIAM
+- Identity
+- Plans
+description: >-
+  Corbado prices its passkey platform primarily on monthly active users
+  (MAU). Historically Corbado offered a self-serve plan that started free
+  with a monthly active user allotment and then charged a per-additional-MAU
+  rate (reported at approximately EUR 0.10 per additional MAU). Corbado's
+  current public packaging centers on two products - Corbado Observe (passkey
+  intelligence/analytics where your IDP still manages passkeys) and Corbado
+  Connect (managed passkey sign-up/sign-in journeys) - both presented as
+  enterprise offerings with custom, request-a-quote pricing. Exact tier
+  thresholds and current per-MAU rates are not publicly fixed and must be
+  confirmed with Corbado sales.
+notes: >-
+  Pricing is not fully published; the per-MAU figure below is a historical
+  data point and the Observe/Connect tiers are custom. Reconcile against the
+  Corbado pricing page and a sales quote before relying on these values.
+sources:
+- https://www.corbado.com/pricing
+- https://www.corbado.com
+- https://docs.corbado.com
+plans:
+- id: corbado-free
+  name: Free / Start for Free
+  type: free
+  description: >-
+    Self-serve entry tier that lets teams add passkeys with a monthly active
+    user allotment included at no charge before per-MAU usage charges apply.
+  entries:
+  - label: Included Monthly Active Users
+    name: included_mau
+    type: limit
+    metric: monthly_active_users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included up to plan allotment (confirm current threshold with Corbado)
+    userMultiplied: false
+  elements:
+  - name: Passkey Authentication
+  - name: Backend API
+  - name: User Management
+- id: corbado-usage
+  name: Usage (Per MAU)
+  type: usage
+  description: >-
+    Monthly-active-user metered usage beyond the included allotment.
+  entries:
+  - label: Additional Monthly Active User
+    name: additional_mau
+    type: usage
+    metric: monthly_active_users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~EUR 0.10 per additional MAU (historical; confirm current rate)
+    userMultiplied: true
+  elements:
+  - name: Passkey Authentication
+  - name: Sessions
+  - name: Identifiers
+- id: corbado-observe
+  name: Corbado Observe
+  type: enterprise
+  description: >-
+    Passkey intelligence and analytics layer where your existing IDP manages
+    passkeys - readiness insights, per-user debugging, adoption analytics, and
+    AI analysis. Custom pricing, request a quote.
+  entries:
+  - label: Observe Subscription
+    name: observe
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: request pricing
+    userMultiplied: false
+  elements:
+  - name: Passkey Analytics
+  - name: Per-User Debugging
+  - name: Readiness Insights
+  - name: AI Analysis
+- id: corbado-connect
+  name: Corbado Connect
+  type: enterprise
+  description: >-
+    Managed passkey solution where Corbado manages passkeys for you - managed
+    sign-up/sign-in journeys, rollout controls, analytics, and implementation
+    guidance. Custom pricing, request a quote.
+  entries:
+  - label: Connect Subscription
+    name: connect
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: request pricing
+    userMultiplied: false
+  elements:
+  - name: Managed Passkey Journeys
+  - name: Rollout Controls
+  - name: Connect Tokens
+  - name: Enterprise Onboarding
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

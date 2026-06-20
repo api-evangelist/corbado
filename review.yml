@@ -1,0 +1,101 @@
+aid: corbado
+name: Corbado
+review:
+  question: Does Corbado expose a documented public WebSocket or streaming API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. The Corbado Backend API is a
+    request/response REST API over HTTPS. WebAuthn passkey ceremonies
+    (append/login start and finish) are modeled as ordinary REST POST
+    request/response pairs, not as a streaming or event-driven transport.
+    No Server-Sent Events (SSE) or WebSocket surface is documented, so
+    there is no in-scope asynchronous transport to model.
+findings:
+  summary: |
+    Corbado does not publish a documented public WebSocket or streaming API.
+    The Corbado Backend API is a synchronous REST (HTTPS) API served from
+    https://backendapi.corbado.io/v2, authenticated with HTTP Basic auth
+    using the project ID as username and the API secret as password. It
+    manages users, login identifiers, sessions, passkeys/credentials,
+    passkey events, Connect tokens, and project exports. Passkey
+    registration and login are two-step REST ceremonies (start then
+    finish) rather than a persistent connection. There is a separate
+    Frontend API (https://{projectID}.frontendapi.corbado.io/v2) used by
+    Corbado's web components and JWT-based session tokens are returned on
+    login, but no realtime, bidirectional, or event-stream endpoint
+    (ws:// or wss:// or SSE) is documented as of the review date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://backendapi.corbado.io/v2
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://{projectID}.frontendapi.corbado.io/v2
+      documented: true
+      note: Frontend API used by Corbado web components; same request/response REST model.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Corbado Backend or Frontend API reference.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming endpoint is documented.
+  endpointsConfirmedRest:
+    - POST https://backendapi.corbado.io/v2/users
+    - GET  https://backendapi.corbado.io/v2/users
+    - GET  https://backendapi.corbado.io/v2/users/{userID}
+    - PATCH https://backendapi.corbado.io/v2/users/{userID}
+    - DELETE https://backendapi.corbado.io/v2/users/{userID}
+    - GET  https://backendapi.corbado.io/v2/users/{userID}/credentials
+    - DELETE https://backendapi.corbado.io/v2/users/{userID}/credentials/{credentialID}
+    - POST https://backendapi.corbado.io/v2/users/{userID}/identifiers
+    - PATCH https://backendapi.corbado.io/v2/users/{userID}/identifiers/{identifierID}
+    - DELETE https://backendapi.corbado.io/v2/users/{userID}/identifiers/{identifierID}
+    - GET  https://backendapi.corbado.io/v2/identifiers
+    - GET  https://backendapi.corbado.io/v2/sessions
+    - POST https://backendapi.corbado.io/v2/sessions/{sessionID}/revoke
+    - POST https://backendapi.corbado.io/v2/passkey/append/start
+    - POST https://backendapi.corbado.io/v2/passkey/append/finish
+    - POST https://backendapi.corbado.io/v2/passkey/login/start
+    - POST https://backendapi.corbado.io/v2/passkey/login/finish
+    - POST https://backendapi.corbado.io/v2/passkey/mediation/start
+    - POST https://backendapi.corbado.io/v2/passkey/mediation/finish
+    - POST https://backendapi.corbado.io/v2/passkey/verifySignedData
+    - POST https://backendapi.corbado.io/v2/users/{userID}/passkeyEvents
+    - GET  https://backendapi.corbado.io/v2/users/{userID}/passkeyEvents
+    - DELETE https://backendapi.corbado.io/v2/users/{userID}/passkeyEvents/{passkeyEventID}
+    - POST https://backendapi.corbado.io/v2/connectTokens
+    - GET  https://backendapi.corbado.io/v2/connectTokens
+    - PATCH https://backendapi.corbado.io/v2/connectTokens/{connectTokenID}
+    - DELETE https://backendapi.corbado.io/v2/connectTokens/{connectTokenID}
+    - GET  https://backendapi.corbado.io/v2/exports/{exportType}
+    - GET  https://backendapi.corbado.io/v2/exports/{exportType}/{filename}/downloadLink
+sources:
+  - url: https://docs.corbado.com/api-reference/backend-api
+    type: APIReference
+    note: Backend API reference; all endpoints are HTTPS REST with HTTP Basic auth.
+  - url: https://backendapi.cloud.corbado.io/v2/openapi.yaml
+    type: OpenAPI
+    note: Published OpenAPI 2.0.0 spec; server https://backendapi.corbado.io/v2, basicAuth security scheme. No WebSocket/SSE bindings.
+  - url: https://docs.corbado.com/api-reference/authentication
+    type: Documentation
+    note: Authentication via project ID (username) + API secret (password) over HTTP Basic.
+  - url: https://docs.corbado.com
+    type: Documentation
+    note: Platform overview; passkeys, sessions, and Connect flows are REST request/response.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists, so no AsyncAPI document was
+    authored. The apis.yml catalogs the documented REST Backend API across
+    Users, Identifiers, Sessions, Passkeys, Connect Tokens, and Projects,
+    each referencing the shared OpenAPI definition.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

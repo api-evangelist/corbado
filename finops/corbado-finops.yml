@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Corbado
+providerId: corbado
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Authentication
+- Passkeys
+- WebAuthn
+- Passwordless
+- CIAM
+- Identity
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Corbado spend. Corbado bills the passkey platform primarily
+  on monthly active users (MAU), with an included allotment on the self-serve
+  tier and a per-additional-MAU rate beyond it, plus custom enterprise
+  packaging for Corbado Observe (passkey intelligence) and Corbado Connect
+  (managed passkeys). The dominant cost driver is the number of distinct users
+  who authenticate within a billing month, so optimization focuses on
+  understanding active-user counts per project and consolidating projects.
+notes: >-
+  Per-MAU rates and tier thresholds are not fully public; verify against the
+  Corbado pricing page and a sales quote during reconciliation.
+sources:
+- https://www.corbado.com/pricing
+- https://docs.corbado.com
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Corbado
+serviceCategory: Identity and Access Management
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: EUR
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Corbado
+  ServiceCategory: Identity and Access Management
+  ProviderName: Corbado
+  PublisherName: Corbado
+  InvoiceIssuerName: Corbado
+  BillingCurrency: EUR
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: monthly_active_users
+  description: Distinct users who authenticate within the billing month, billed per MAU beyond the included allotment.
+  unit: monthly_active_users
+  aggregation: max
+  dimensions:
+  - project
+  - account
+- name: included_mau
+  description: Monthly active users included at no charge under the self-serve plan allotment.
+  unit: monthly_active_users
+  aggregation: max
+  dimensions:
+  - project
+- name: observe_subscription
+  description: Corbado Observe enterprise subscription (custom contract).
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+- name: connect_subscription
+  description: Corbado Connect enterprise subscription (custom contract).
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track monthly active users per Corbado project; reconcile MAU counts against invoices.
+- name: Allocation
+  description: Use separate Corbado projects per product/environment and map each to a cost center.
+- name: Optimization
+  description: Consolidate low-traffic projects, retire inactive users, and right-size between self-serve usage and enterprise Connect/Observe contracts.
+- name: Accountability
+  description: Assign an owner per project; review MAU growth monthly against budget and contracted thresholds.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

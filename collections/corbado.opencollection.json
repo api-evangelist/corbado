@@ -1,0 +1,451 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{projectID}}",
+      "password": "{{apiSecret}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user"
+        },
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/users"
+          },
+          "docs": "List users"
+        },
+        {
+          "info": {
+            "name": "Retrieve a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}"
+          },
+          "docs": "Retrieve a user"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user"
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}"
+          },
+          "docs": "Delete a user"
+        },
+        {
+          "info": {
+            "name": "List passkeys for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/credentials"
+          },
+          "docs": "List passkeys for user"
+        },
+        {
+          "info": {
+            "name": "Delete passkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/credentials/{credentialID}"
+          },
+          "docs": "Delete passkey"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create login identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/identifiers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create login identifier"
+        },
+        {
+          "info": {
+            "name": "Update identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/identifiers/{identifierID}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update identifier"
+        },
+        {
+          "info": {
+            "name": "Delete identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/identifiers/{identifierID}"
+          },
+          "docs": "Delete identifier"
+        },
+        {
+          "info": {
+            "name": "List all login identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/identifiers"
+          },
+          "docs": "List all login identifiers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/sessions"
+          },
+          "docs": "List all sessions"
+        },
+        {
+          "info": {
+            "name": "Revoke a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/sessions/{sessionID}/revoke",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke a session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Passkeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start creating passkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/append/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start creating passkey"
+        },
+        {
+          "info": {
+            "name": "Finish creating passkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/append/finish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finish creating passkey"
+        },
+        {
+          "info": {
+            "name": "Start passkey login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/login/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start passkey login"
+        },
+        {
+          "info": {
+            "name": "Finish passkey login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/login/finish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finish passkey login"
+        },
+        {
+          "info": {
+            "name": "Start passkey login (Conditional UI)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/mediation/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start passkey login (Conditional UI)"
+        },
+        {
+          "info": {
+            "name": "Finish passkey login (Conditional UI)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/mediation/finish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finish passkey login (Conditional UI)"
+        },
+        {
+          "info": {
+            "name": "Verify signed passkey data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/verifySignedData",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify signed passkey data"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PasskeyEvents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create passkey event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/passkeyEvents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create passkey event"
+        },
+        {
+          "info": {
+            "name": "List passkey events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/passkeyEvents"
+          },
+          "docs": "List passkey events"
+        },
+        {
+          "info": {
+            "name": "Delete passkey event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/users/{userID}/passkeyEvents/{passkeyEventID}"
+          },
+          "docs": "Delete passkey event"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ConnectTokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create ConnectToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/connectTokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create ConnectToken"
+        },
+        {
+          "info": {
+            "name": "List ConnectTokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/connectTokens"
+          },
+          "docs": "List ConnectTokens"
+        },
+        {
+          "info": {
+            "name": "Update ConnectToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://backendapi.corbado.io/v2/connectTokens/{connectTokenID}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update ConnectToken"
+        },
+        {
+          "info": {
+            "name": "Delete ConnectToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/connectTokens/{connectTokenID}"
+          },
+          "docs": "Delete ConnectToken"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List project exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/exports/{exportType}"
+          },
+          "docs": "List project exports"
+        },
+        {
+          "info": {
+            "name": "Get export download link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/exports/{exportType}/{filename}/downloadLink"
+          },
+          "docs": "Get export download link"
+        }
+      ]
+    }
+  ]
+}

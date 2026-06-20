@@ -1,0 +1,1096 @@
+{
+  "item": [
+    {
+      "id": "7fa3cfb0-b572-4e8b-aa6a-c89b4c0df3f5",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6998fd59-00d4-4489-aa67-ae0dae226fe8",
+          "name": "Create a new user",
+          "request": {
+            "name": "Create a new user",
+            "description": {},
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a6665106-417c-4291-891d-d15d5187c1fd",
+          "name": "List users",
+          "request": {
+            "name": "List users",
+            "description": {},
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "dae20f2a-6783-4e09-a60e-bb1748b7fe9c",
+          "name": "Retrieve a user",
+          "request": {
+            "name": "Retrieve a user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "3a53d398-ade3-41b9-aaec-043f07522769",
+          "name": "Update a user",
+          "request": {
+            "name": "Update a user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "0c825da9-4a3e-4cfc-9a98-f5df40c76af5",
+          "name": "Delete a user",
+          "request": {
+            "name": "Delete a user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "c7685fbf-7504-42e5-98c1-e3bc27874ad6",
+          "name": "List passkeys for user",
+          "request": {
+            "name": "List passkeys for user",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "8ded0273-9da2-4bb4-94a6-2a88991dd086",
+          "name": "Delete passkey",
+          "request": {
+            "name": "Delete passkey",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "credentials",
+                ":credentialID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                },
+                {
+                  "key": "credentialID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "3db2262e-6ca1-49a2-93c5-be04202de735",
+      "name": "Identifiers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f306c2d8-1d48-4c97-9ed8-86194ffd3d86",
+          "name": "Create login identifier",
+          "request": {
+            "name": "Create login identifier",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "identifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "823dc698-c04d-4e93-b60f-6a580d38a017",
+          "name": "Update identifier",
+          "request": {
+            "name": "Update identifier",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "identifiers",
+                ":identifierID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                },
+                {
+                  "key": "identifierID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "2f2a9f73-fecc-4ebd-a205-34cf46e1ac66",
+          "name": "Delete identifier",
+          "request": {
+            "name": "Delete identifier",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "identifiers",
+                ":identifierID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                },
+                {
+                  "key": "identifierID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "4bc00450-8829-494b-9474-5a8f959949f5",
+          "name": "List all login identifiers",
+          "request": {
+            "name": "List all login identifiers",
+            "description": {},
+            "url": {
+              "path": [
+                "identifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "1b7357a3-875d-4ef0-a9cf-50b5e40eb3f3",
+      "name": "Sessions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dfa8d84e-f6aa-4435-9a20-defc5d5eb8bc",
+          "name": "List all sessions",
+          "request": {
+            "name": "List all sessions",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "75ae4bf3-a6af-42ae-b876-be52b30506b0",
+          "name": "Revoke a session",
+          "request": {
+            "name": "Revoke a session",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":sessionID",
+                "revoke"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "sessionID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "3503593f-413f-432c-bccc-975c7beb473c",
+      "name": "Passkeys",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a774466-b137-4482-afbe-4fd3b8d69807",
+          "name": "Start creating passkey",
+          "request": {
+            "name": "Start creating passkey",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "append",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "acb2898e-3dfd-41fe-9437-a134572e4614",
+          "name": "Finish creating passkey",
+          "request": {
+            "name": "Finish creating passkey",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "append",
+                "finish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "66d83385-c40e-49b3-8e71-4efd2c246335",
+          "name": "Start passkey login",
+          "request": {
+            "name": "Start passkey login",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "login",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "e31b97ec-c74a-4ffe-9a53-c7b6666ec09a",
+          "name": "Finish passkey login",
+          "request": {
+            "name": "Finish passkey login",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "login",
+                "finish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "5d76fde8-4887-46a9-90ae-cd61133eb286",
+          "name": "Start passkey login (Conditional UI)",
+          "request": {
+            "name": "Start passkey login (Conditional UI)",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "mediation",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "085a192e-f78b-45ec-a2ea-b505cf841916",
+          "name": "Finish passkey login (Conditional UI)",
+          "request": {
+            "name": "Finish passkey login (Conditional UI)",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "mediation",
+                "finish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "c82bad68-b4a1-49dd-8e4f-ec609b59b83b",
+          "name": "Verify signed passkey data",
+          "request": {
+            "name": "Verify signed passkey data",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "verifySignedData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "848e73aa-c810-4bb5-9f9d-5aa52688ca80",
+      "name": "PasskeyEvents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc86ea9f-7660-49dd-b802-f9196f280c53",
+          "name": "Create passkey event",
+          "request": {
+            "name": "Create passkey event",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "passkeyEvents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "daddeca9-6a63-4e1c-8503-55617734a0ab",
+          "name": "List passkey events",
+          "request": {
+            "name": "List passkey events",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "passkeyEvents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "3eae7b1f-7406-408f-af78-87a57a5dba9d",
+          "name": "Delete passkey event",
+          "request": {
+            "name": "Delete passkey event",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":userID",
+                "passkeyEvents",
+                ":passkeyEventID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "userID",
+                  "value": ""
+                },
+                {
+                  "key": "passkeyEventID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "74e998ec-dc8b-4527-b2ac-85c1fa326aa3",
+      "name": "ConnectTokens",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10000354-ab8d-4398-8743-3b5d3193c739",
+          "name": "Create ConnectToken",
+          "request": {
+            "name": "Create ConnectToken",
+            "description": {},
+            "url": {
+              "path": [
+                "connectTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "a9441dac-b197-41d1-b616-e3f651f18b1e",
+          "name": "List ConnectTokens",
+          "request": {
+            "name": "List ConnectTokens",
+            "description": {},
+            "url": {
+              "path": [
+                "connectTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "a8855f06-5a51-4597-aba6-4877fb907eed",
+          "name": "Update ConnectToken",
+          "request": {
+            "name": "Update ConnectToken",
+            "description": {},
+            "url": {
+              "path": [
+                "connectTokens",
+                ":connectTokenID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "connectTokenID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "5e9e7d89-e08a-4c7b-89c1-480957b553df",
+          "name": "Delete ConnectToken",
+          "request": {
+            "name": "Delete ConnectToken",
+            "description": {},
+            "url": {
+              "path": [
+                "connectTokens",
+                ":connectTokenID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "connectTokenID",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "219c5cf2-7852-46dc-bcff-6727610fdfbd",
+      "name": "Exports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "606e26b2-ec42-41c3-bcaa-447b204d67fb",
+          "name": "List project exports",
+          "request": {
+            "name": "List project exports",
+            "description": {},
+            "url": {
+              "path": [
+                "exports",
+                ":exportType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "exportType",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "6e66008e-7d11-49b2-97c0-8ea12ca10a6e",
+          "name": "Get export download link",
+          "request": {
+            "name": "Get export download link",
+            "description": {},
+            "url": {
+              "path": [
+                "exports",
+                ":exportType",
+                ":filename",
+                "downloadLink"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "exportType",
+                  "value": ""
+                },
+                {
+                  "key": "filename",
+                  "value": ""
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://backendapi.corbado.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{projectID}}"
+      },
+      {
+        "key": "password",
+        "value": "{{apiSecret}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "19a5d623-f294-45e4-8faa-6498b6280eac",
+    "name": "Corbado Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the\n\nContact Support:\n Name: Corbado Support\n Email: support@corbado.com",
+      "type": "text/plain"
+    }
+  }
+}
