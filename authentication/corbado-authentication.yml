@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/corbado-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication. The username is the project ID (e.g. pro-1234567890)
+    and the password is the API secret, both issued from the Corbado Developer Panel.
+  sources:
+  - openapi/corbado-openapi.yml

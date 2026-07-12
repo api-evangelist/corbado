@@ -154,6 +154,14 @@ apis:
   description: Project-level configuration and data exports, including CNAME configuration
     and downloadable project exports for users and passkey events.
 common:
+- type: TrustCenter
+  url: security/corbado-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/corbado-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/corbado-domain-security.yml
+- type: Authentication
+  url: authentication/corbado-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/corbado
 - type: LinkedIn
@@ -168,6 +176,8 @@ common:
   url: rate-limits/corbado-rate-limits.yml
 - type: FinOps
   url: finops/corbado-finops.yml
+- url: https://www.corbado.com/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
