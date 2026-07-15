@@ -154,6 +154,8 @@ apis:
   description: Project-level configuration and data exports, including CNAME configuration
     and downloadable project exports for users and passkey events.
 common:
+- type: AgenticAccess
+  url: agentic-access/corbado-agentic-access.yml
 - type: TrustCenter
   url: security/corbado-trust-center.yml
 - type: VulnerabilityDisclosure
