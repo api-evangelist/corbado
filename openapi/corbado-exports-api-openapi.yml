@@ -1,0 +1,149 @@
+openapi: 3.0.1
+info:
+  title: Corbado Backend ConnectTokens Exports API
+  description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
+  termsOfService: https://www.corbado.com/legal/terms
+  contact:
+    name: Corbado Support
+    url: https://docs.corbado.com
+    email: support@corbado.com
+  version: 2.0.0
+servers:
+- url: https://backendapi.corbado.io/v2
+  description: Corbado Backend API v2
+security:
+- basicAuth: []
+tags:
+- name: Exports
+  description: Project data exports and download links.
+paths:
+  /exports/{exportType}:
+    parameters:
+    - name: exportType
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - users
+        - passkeyEvents
+    get:
+      operationId: exportList
+      tags:
+      - Exports
+      summary: List project exports
+      responses:
+        '200':
+          description: A list of available export files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportList'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+  /exports/{exportType}/{filename}/downloadLink:
+    parameters:
+    - name: exportType
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: filename
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: exportDownloadLink
+      tags:
+      - Exports
+      summary: Get export download link
+      responses:
+        '200':
+          description: A time-limited download link for the export file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportDownloadLink'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+components:
+  schemas:
+    ErrorRsp:
+      type: object
+      required:
+      - httpStatusCode
+      - message
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            details:
+              type: string
+            validation:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+    ExportDownloadLink:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        expiresMs:
+          type: integer
+          format: int64
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    ExportList:
+      type: object
+      required:
+      - exports
+      properties:
+        exports:
+          type: array
+          items:
+            type: object
+            properties:
+              filename:
+                type: string
+              sizeBytes:
+                type: integer
+                format: int64
+              created:
+                type: string
+                format: date-time
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. The username is the project ID (e.g. pro-1234567890) and the password is the API secret, both issued from the Corbado Developer Panel.

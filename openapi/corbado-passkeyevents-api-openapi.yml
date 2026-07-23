@@ -1,0 +1,210 @@
+openapi: 3.0.1
+info:
+  title: Corbado Backend ConnectTokens PasskeyEvents API
+  description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
+  termsOfService: https://www.corbado.com/legal/terms
+  contact:
+    name: Corbado Support
+    url: https://docs.corbado.com
+    email: support@corbado.com
+  version: 2.0.0
+servers:
+- url: https://backendapi.corbado.io/v2
+  description: Corbado Backend API v2
+security:
+- basicAuth: []
+tags:
+- name: PasskeyEvents
+  description: Record and query passkey lifecycle events for a user.
+paths:
+  /users/{userID}/passkeyEvents:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    post:
+      operationId: passkeyEventCreate
+      tags:
+      - PasskeyEvents
+      summary: Create passkey event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyEventCreateReq'
+      responses:
+        '200':
+          description: The created passkey event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyEvent'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+    get:
+      operationId: passkeyEventList
+      tags:
+      - PasskeyEvents
+      summary: List passkey events
+      responses:
+        '200':
+          description: A list of passkey events for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyEventList'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+  /users/{userID}/passkeyEvents/{passkeyEventID}:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    - name: passkeyEventID
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: passkeyEventDelete
+      tags:
+      - PasskeyEvents
+      summary: Delete passkey event
+      responses:
+        '200':
+          description: The passkey event was deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericRsp'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+components:
+  schemas:
+    ErrorRsp:
+      type: object
+      required:
+      - httpStatusCode
+      - message
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            details:
+              type: string
+            validation:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+    ClientInformation:
+      type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
+      properties:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
+          type: string
+        clientEnvHandle:
+          type: string
+        javaScriptHighEntropy:
+          type: string
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    PasskeyEventCreateReq:
+      type: object
+      required:
+      - passkeyEventType
+      properties:
+        passkeyEventType:
+          type: string
+          enum:
+          - login-success
+          - login-error
+          - registration-success
+          - registration-error
+          - login-error-untrusted
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyEvent:
+      type: object
+      required:
+      - passkeyEventID
+      - userID
+      - passkeyEventType
+      properties:
+        passkeyEventID:
+          type: string
+        userID:
+          type: string
+        passkeyEventType:
+          type: string
+          enum:
+          - login-success
+          - login-error
+          - registration-success
+          - registration-error
+          - login-error-untrusted
+        created:
+          type: string
+          format: date-time
+    PasskeyEventList:
+      type: object
+      required:
+      - passkeyEvents
+      properties:
+        passkeyEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasskeyEvent'
+  parameters:
+    UserID:
+      name: userID
+      in: path
+      required: true
+      description: The Corbado user ID (e.g. usr-4693224802260150919).
+      schema:
+        type: string
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. The username is the project ID (e.g. pro-1234567890) and the password is the API secret, both issued from the Corbado Developer Panel.

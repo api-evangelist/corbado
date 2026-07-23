@@ -1,0 +1,199 @@
+openapi: 3.0.1
+info:
+  title: Corbado Backend ConnectTokens Sessions API
+  description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
+  termsOfService: https://www.corbado.com/legal/terms
+  contact:
+    name: Corbado Support
+    url: https://docs.corbado.com
+    email: support@corbado.com
+  version: 2.0.0
+servers:
+- url: https://backendapi.corbado.io/v2
+  description: Corbado Backend API v2
+security:
+- basicAuth: []
+tags:
+- name: Sessions
+  description: List and revoke authenticated sessions.
+paths:
+  /sessions:
+    get:
+      operationId: sessionList
+      tags:
+      - Sessions
+      summary: List all sessions
+      parameters:
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: A paged list of sessions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionList'
+        '401':
+          $ref: '#/components/responses/ErrorRsp'
+  /sessions/{sessionID}/revoke:
+    parameters:
+    - name: sessionID
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: sessionRevoke
+      tags:
+      - Sessions
+      summary: Revoke a session
+      responses:
+        '200':
+          description: The session was revoked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericRsp'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+components:
+  schemas:
+    ErrorRsp:
+      type: object
+      required:
+      - httpStatusCode
+      - message
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            details:
+              type: string
+            validation:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+    SessionList:
+      type: object
+      required:
+      - sessions
+      - paging
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Session'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    Session:
+      type: object
+      required:
+      - sessionID
+      - userID
+      properties:
+        sessionID:
+          type: string
+        userID:
+          type: string
+        expiresMs:
+          type: integer
+          format: int64
+        created:
+          type: string
+          format: date-time
+    Paging:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
+  parameters:
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
+          type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. The username is the project ID (e.g. pro-1234567890) and the password is the API secret, both issued from the Corbado Developer Panel.

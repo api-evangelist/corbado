@@ -1,0 +1,308 @@
+openapi: 3.0.1
+info:
+  title: Corbado Backend ConnectTokens Passkeys API
+  description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
+  termsOfService: https://www.corbado.com/legal/terms
+  contact:
+    name: Corbado Support
+    url: https://docs.corbado.com
+    email: support@corbado.com
+  version: 2.0.0
+servers:
+- url: https://backendapi.corbado.io/v2
+  description: Corbado Backend API v2
+security:
+- basicAuth: []
+tags:
+- name: Passkeys
+  description: WebAuthn passkey registration and login ceremonies and verification.
+paths:
+  /passkey/append/start:
+    post:
+      operationId: passkeyAppendStart
+      tags:
+      - Passkeys
+      summary: Start creating passkey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyAppendStartReq'
+      responses:
+        '200':
+          description: WebAuthn credential creation options.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyStartRsp'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+  /passkey/append/finish:
+    post:
+      operationId: passkeyAppendFinish
+      tags:
+      - Passkeys
+      summary: Finish creating passkey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyFinishReq'
+      responses:
+        '200':
+          description: The newly registered passkey.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyData'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+  /passkey/login/start:
+    post:
+      operationId: passkeyLoginStart
+      tags:
+      - Passkeys
+      summary: Start passkey login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyLoginStartReq'
+      responses:
+        '200':
+          description: WebAuthn credential request options.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyStartRsp'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+  /passkey/login/finish:
+    post:
+      operationId: passkeyLoginFinish
+      tags:
+      - Passkeys
+      summary: Finish passkey login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyFinishReq'
+      responses:
+        '200':
+          description: The authenticated passkey and user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyLoginFinishRsp'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+  /passkey/mediation/start:
+    post:
+      operationId: passkeyMediationStart
+      tags:
+      - Passkeys
+      summary: Start passkey login (Conditional UI)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyLoginStartReq'
+      responses:
+        '200':
+          description: WebAuthn credential request options for conditional UI.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyStartRsp'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+  /passkey/mediation/finish:
+    post:
+      operationId: passkeyMediationFinish
+      tags:
+      - Passkeys
+      summary: Finish passkey login (Conditional UI)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyFinishReq'
+      responses:
+        '200':
+          description: The authenticated passkey and user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyLoginFinishRsp'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+  /passkey/verifySignedData:
+    post:
+      operationId: passkeyVerifySignedData
+      tags:
+      - Passkeys
+      summary: Verify signed passkey data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyVerifySignedDataReq'
+      responses:
+        '200':
+          description: The verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyVerifySignedDataRsp'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+components:
+  schemas:
+    ErrorRsp:
+      type: object
+      required:
+      - httpStatusCode
+      - message
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            details:
+              type: string
+            validation:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+    PasskeyVerifySignedDataReq:
+      type: object
+      required:
+      - signedData
+      properties:
+        userID:
+          type: string
+        signedData:
+          type: string
+    PasskeyFinishReq:
+      type: object
+      required:
+      - signedChallenge
+      properties:
+        signedChallenge:
+          type: string
+          description: The serialized WebAuthn attestation or assertion response from the browser.
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyData:
+      type: object
+      properties:
+        credentialID:
+          type: string
+        userID:
+          type: string
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
+          type: boolean
+        backupState:
+          type: boolean
+        aaguid:
+          type: string
+        created:
+          type: string
+          format: date-time
+    PasskeyVerifySignedDataRsp:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        userID:
+          type: string
+    ClientInformation:
+      type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
+      properties:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
+          type: string
+        clientEnvHandle:
+          type: string
+        javaScriptHighEntropy:
+          type: string
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    PasskeyAppendStartReq:
+      type: object
+      required:
+      - userID
+      properties:
+        userID:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyLoginStartReq:
+      type: object
+      properties:
+        identifierValue:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyStartRsp:
+      type: object
+      properties:
+        challenge:
+          type: string
+          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
+    PasskeyLoginFinishRsp:
+      type: object
+      properties:
+        userID:
+          type: string
+        passkey:
+          $ref: '#/components/schemas/PasskeyData'
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. The username is the project ID (e.g. pro-1234567890) and the password is the API secret, both issued from the Corbado Developer Panel.

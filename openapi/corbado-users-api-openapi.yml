@@ -1,0 +1,366 @@
+openapi: 3.0.1
+info:
+  title: Corbado Backend ConnectTokens Users API
+  description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
+  termsOfService: https://www.corbado.com/legal/terms
+  contact:
+    name: Corbado Support
+    url: https://docs.corbado.com
+    email: support@corbado.com
+  version: 2.0.0
+servers:
+- url: https://backendapi.corbado.io/v2
+  description: Corbado Backend API v2
+security:
+- basicAuth: []
+tags:
+- name: Users
+  description: Create and manage end users and their social logins and credentials.
+paths:
+  /users:
+    post:
+      operationId: userCreate
+      tags:
+      - Users
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateReq'
+      responses:
+        '200':
+          description: The created user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/ErrorRsp'
+        '401':
+          $ref: '#/components/responses/ErrorRsp'
+    get:
+      operationId: userList
+      tags:
+      - Users
+      summary: List users
+      parameters:
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: A paged list of users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+        '401':
+          $ref: '#/components/responses/ErrorRsp'
+  /users/{userID}:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    get:
+      operationId: userGet
+      tags:
+      - Users
+      summary: Retrieve a user
+      responses:
+        '200':
+          description: The requested user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+    patch:
+      operationId: userUpdate
+      tags:
+      - Users
+      summary: Update a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateReq'
+      responses:
+        '200':
+          description: The updated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+    delete:
+      operationId: userDelete
+      tags:
+      - Users
+      summary: Delete a user
+      responses:
+        '200':
+          description: The user was deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericRsp'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+  /users/{userID}/credentials:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    get:
+      operationId: userCredentialList
+      tags:
+      - Users
+      summary: List passkeys for user
+      responses:
+        '200':
+          description: The user's passkey credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialList'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+  /users/{userID}/credentials/{credentialID}:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    - name: credentialID
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      operationId: userCredentialDelete
+      tags:
+      - Users
+      summary: Delete passkey
+      responses:
+        '200':
+          description: The passkey credential was deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericRsp'
+        '404':
+          $ref: '#/components/responses/ErrorRsp'
+components:
+  schemas:
+    ErrorRsp:
+      type: object
+      required:
+      - httpStatusCode
+      - message
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            details:
+              type: string
+            validation:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+    User:
+      type: object
+      required:
+      - userID
+      - status
+      - updated
+      - updatedMs
+      properties:
+        userID:
+          type: string
+          example: usr-4693224802260150919
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - disabled
+        fullName:
+          type: string
+          example: Jane Doe
+        explicitWebauthnID:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        updatedMs:
+          type: integer
+          format: int64
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+    PasskeyData:
+      type: object
+      properties:
+        credentialID:
+          type: string
+        userID:
+          type: string
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
+          type: boolean
+        backupState:
+          type: boolean
+        aaguid:
+          type: string
+        created:
+          type: string
+          format: date-time
+    UserCreateReq:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - disabled
+        fullName:
+          type: string
+        explicitWebauthnID:
+          type: string
+    UserList:
+      type: object
+      required:
+      - users
+      - paging
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    Paging:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
+    CredentialList:
+      type: object
+      required:
+      - credentials
+      properties:
+        credentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasskeyData'
+    UserUpdateReq:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - disabled
+        fullName:
+          type: string
+  parameters:
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
+    UserID:
+      name: userID
+      in: path
+      required: true
+      description: The Corbado user ID (e.g. usr-4693224802260150919).
+      schema:
+        type: string
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
+          type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. The username is the project ID (e.g. pro-1234567890) and the password is the API secret, both issued from the Corbado Developer Panel.
