@@ -1,0 +1,26 @@
+{
+  "provider": "corbado",
+  "sources": [
+    "corbado-connecttokens-api-openapi.yml",
+    "corbado-exports-api-openapi.yml",
+    "corbado-identifiers-api-openapi.yml",
+    "corbado-passkeyevents-api-openapi.yml",
+    "corbado-passkeys-api-openapi.yml",
+    "corbado-sessions-api-openapi.yml",
+    "corbado-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "corbado-connecttokens-api-openapi.yml",
+    "corbado-exports-api-openapi.yml",
+    "corbado-identifiers-api-openapi.yml",
+    "corbado-passkeyevents-api-openapi.yml",
+    "corbado-passkeys-api-openapi.yml",
+    "corbado-sessions-api-openapi.yml",
+    "corbado-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
