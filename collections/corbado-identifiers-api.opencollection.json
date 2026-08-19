@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend ConnectTokens Identifiers API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create login identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/users/:userID/identifiers",
+            "params": [
+              {
+                "name": "userID",
+                "value": "",
+                "type": "path",
+                "description": "The Corbado user ID (e.g. usr-4693224802260150919)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create login identifier"
+        },
+        {
+          "info": {
+            "name": "Update identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://backendapi.corbado.io/v2/users/:userID/identifiers/:identifierID",
+            "params": [
+              {
+                "name": "userID",
+                "value": "",
+                "type": "path",
+                "description": "The Corbado user ID (e.g. usr-4693224802260150919)."
+              },
+              {
+                "name": "identifierID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update identifier"
+        },
+        {
+          "info": {
+            "name": "Delete identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/users/:userID/identifiers/:identifierID",
+            "params": [
+              {
+                "name": "userID",
+                "value": "",
+                "type": "path",
+                "description": "The Corbado user ID (e.g. usr-4693224802260150919)."
+              },
+              {
+                "name": "identifierID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete identifier"
+        },
+        {
+          "info": {
+            "name": "List all login identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/identifiers",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Field and direction to sort by, e.g. created:desc."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Repeatable filter expressions, e.g. status:eq:active."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all login identifiers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend ConnectTokens PasskeyEvents API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PasskeyEvents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List passkey events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/users/:userID/passkeyEvents",
+            "params": [
+              {
+                "name": "userID",
+                "value": "",
+                "type": "path",
+                "description": "The Corbado user ID (e.g. usr-4693224802260150919)."
+              }
+            ]
+          },
+          "docs": "List passkey events"
+        },
+        {
+          "info": {
+            "name": "Create passkey event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/users/:userID/passkeyEvents",
+            "params": [
+              {
+                "name": "userID",
+                "value": "",
+                "type": "path",
+                "description": "The Corbado user ID (e.g. usr-4693224802260150919)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create passkey event"
+        },
+        {
+          "info": {
+            "name": "Delete passkey event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/users/:userID/passkeyEvents/:passkeyEventID",
+            "params": [
+              {
+                "name": "userID",
+                "value": "",
+                "type": "path",
+                "description": "The Corbado user ID (e.g. usr-4693224802260150919)."
+              },
+              {
+                "name": "passkeyEventID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete passkey event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

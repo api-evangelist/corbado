@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend ConnectTokens Sessions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/sessions",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Field and direction to sort by, e.g. created:desc."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Repeatable filter expressions, e.g. status:eq:active."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all sessions"
+        },
+        {
+          "info": {
+            "name": "Revoke a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/sessions/:sessionID/revoke",
+            "params": [
+              {
+                "name": "sessionID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revoke a session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

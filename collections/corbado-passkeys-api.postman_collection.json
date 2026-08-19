@@ -1,0 +1,1113 @@
+{
+  "item": [
+    {
+      "id": "1f45927e-bdde-46a7-9310-a95ed7789bcf",
+      "name": "Passkeys",
+      "description": {
+        "content": "WebAuthn passkey registration and login ceremonies and verification.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fad05a27-5a84-4ff1-9065-c77eb30ba47f",
+          "name": "Start creating passkey",
+          "request": {
+            "name": "Start creating passkey",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "append",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userID\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9b21684-b237-437d-9770-d6c68e8172f0",
+              "name": "WebAuthn credential creation options.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "append",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userID\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"challenge\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43988493-08bb-4979-8299-d0b561a88a49",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "append",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userID\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 8371,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 3355.5211878943483,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5644e278-c6f0-4e6b-8e90-c06476adca15",
+          "name": "Finish creating passkey",
+          "request": {
+            "name": "Finish creating passkey",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "append",
+                "finish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d7b62db-2765-4a91-a62c-cb77842dd975",
+              "name": "The newly registered passkey.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "append",
+                    "finish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credentialID\": \"string\",\n  \"userID\": \"string\",\n  \"attestationType\": \"string\",\n  \"transports\": [\n    \"string\",\n    \"string\"\n  ],\n  \"backupEligible\": false,\n  \"backupState\": true,\n  \"aaguid\": \"string\",\n  \"created\": \"2023-02-10T20:28:06.256Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55d3d1bb-d95b-4dea-afa5-2a5dae7e8705",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "append",
+                    "finish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 2680,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 2620.998711075526,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ab8a0b5-6d0b-4320-bc98-cd6de503b731",
+          "name": "Start passkey login",
+          "request": {
+            "name": "Start passkey login",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "login",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifierValue\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0597715e-26cf-4447-a810-dcfd98631321",
+              "name": "WebAuthn credential request options.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "login",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifierValue\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"challenge\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3454d8f-6f56-44c0-b141-0aba9f1df835",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "login",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifierValue\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 2680,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 2620.998711075526,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1c53188-b711-4723-8931-9dcb237fa9ec",
+          "name": "Finish passkey login",
+          "request": {
+            "name": "Finish passkey login",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "login",
+                "finish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6199aaba-e9c3-45e7-bab7-a784b483b4e8",
+              "name": "The authenticated passkey and user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "login",
+                    "finish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userID\": \"string\",\n  \"passkey\": {\n    \"credentialID\": \"string\",\n    \"userID\": \"string\",\n    \"attestationType\": \"string\",\n    \"transports\": [\n      \"string\",\n      \"string\"\n    ],\n    \"backupEligible\": false,\n    \"backupState\": false,\n    \"aaguid\": \"string\",\n    \"created\": \"2012-11-27T19:57:30.749Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "454b51c0-ea8d-4448-9e2c-60189d13c0da",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "login",
+                    "finish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 2680,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 2620.998711075526,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15af228c-d17a-4915-ae45-e6a89992e016",
+          "name": "Start passkey login (Conditional UI)",
+          "request": {
+            "name": "Start passkey login (Conditional UI)",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "mediation",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifierValue\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c21d3c2f-536a-4a47-8acd-1a6a41daf10e",
+              "name": "WebAuthn credential request options for conditional UI.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "mediation",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifierValue\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"challenge\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41c70006-88e1-4879-aa83-0dbdec7a2fbb",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "mediation",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifierValue\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 2680,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 2620.998711075526,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "036e557c-f335-4713-974a-b66a117f4a3f",
+          "name": "Finish passkey login (Conditional UI)",
+          "request": {
+            "name": "Finish passkey login (Conditional UI)",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "mediation",
+                "finish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6116b7d4-6b41-44ef-9623-3cb745d813f3",
+              "name": "The authenticated passkey and user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "mediation",
+                    "finish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userID\": \"string\",\n  \"passkey\": {\n    \"credentialID\": \"string\",\n    \"userID\": \"string\",\n    \"attestationType\": \"string\",\n    \"transports\": [\n      \"string\",\n      \"string\"\n    ],\n    \"backupEligible\": false,\n    \"backupState\": false,\n    \"aaguid\": \"string\",\n    \"created\": \"2012-11-27T19:57:30.749Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38b54f4d-58f7-4ae0-a3e2-dc341d69dfd9",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "mediation",
+                    "finish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedChallenge\": \"<string>\",\n  \"clientInformation\": {\n    \"bluetoothAvailable\": \"<boolean>\",\n    \"userAgent\": \"<string>\",\n    \"clientEnvHandle\": \"<string>\",\n    \"javaScriptHighEntropy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 2680,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 2620.998711075526,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6955da5c-6499-4d34-835f-6ee442927bf1",
+          "name": "Verify signed passkey data",
+          "request": {
+            "name": "Verify signed passkey data",
+            "description": {},
+            "url": {
+              "path": [
+                "passkey",
+                "verifySignedData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signedData\": \"<string>\",\n  \"userID\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43c42ebc-57bb-4f87-8ec7-ce7afdc058d8",
+              "name": "The verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "verifySignedData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedData\": \"<string>\",\n  \"userID\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid\": true,\n  \"userID\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39dc9dae-ff4f-4e71-83a3-899a673982c7",
+              "name": "An error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "passkey",
+                    "verifySignedData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signedData\": \"<string>\",\n  \"userID\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatusCode\": 2680,\n  \"message\": \"string\",\n  \"requestData\": {\n    \"requestID\": \"string\",\n    \"link\": \"string\"\n  },\n  \"runtime\": 2620.998711075526,\n  \"error\": {\n    \"type\": \"string\",\n    \"details\": \"string\",\n    \"validation\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://backendapi.corbado.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b887899f-44a8-446b-928b-6434476d83c3",
+    "name": "Corbado Backend ConnectTokens Passkeys API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).\n\nContact Support:\n Name: Corbado Support\n Email: support@corbado.com",
+      "type": "text/plain"
+    }
+  }
+}

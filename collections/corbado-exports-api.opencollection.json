@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend ConnectTokens Exports API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List project exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/exports/:exportType",
+            "params": [
+              {
+                "name": "exportType",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List project exports"
+        },
+        {
+          "info": {
+            "name": "Get export download link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/exports/:exportType/:filename/downloadLink",
+            "params": [
+              {
+                "name": "exportType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get export download link"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

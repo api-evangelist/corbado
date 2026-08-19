@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend ConnectTokens API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConnectTokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ConnectTokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://backendapi.corbado.io/v2/connectTokens",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Field and direction to sort by, e.g. created:desc."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Repeatable filter expressions, e.g. status:eq:active."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List ConnectTokens"
+        },
+        {
+          "info": {
+            "name": "Create ConnectToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/connectTokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create ConnectToken"
+        },
+        {
+          "info": {
+            "name": "Update ConnectToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://backendapi.corbado.io/v2/connectTokens/:connectTokenID",
+            "params": [
+              {
+                "name": "connectTokenID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update ConnectToken"
+        },
+        {
+          "info": {
+            "name": "Delete ConnectToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://backendapi.corbado.io/v2/connectTokens/:connectTokenID",
+            "params": [
+              {
+                "name": "connectTokenID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete ConnectToken"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

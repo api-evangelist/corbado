@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Corbado Backend ConnectTokens Passkeys API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Passkeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start creating passkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/append/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start creating passkey"
+        },
+        {
+          "info": {
+            "name": "Finish creating passkey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/append/finish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finish creating passkey"
+        },
+        {
+          "info": {
+            "name": "Start passkey login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/login/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start passkey login"
+        },
+        {
+          "info": {
+            "name": "Finish passkey login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/login/finish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finish passkey login"
+        },
+        {
+          "info": {
+            "name": "Start passkey login (Conditional UI)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/mediation/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start passkey login (Conditional UI)"
+        },
+        {
+          "info": {
+            "name": "Finish passkey login (Conditional UI)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/mediation/finish",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finish passkey login (Conditional UI)"
+        },
+        {
+          "info": {
+            "name": "Verify signed passkey data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://backendapi.corbado.io/v2/passkey/verifySignedData",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify signed passkey data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
