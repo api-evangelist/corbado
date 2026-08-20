@@ -38,6 +38,8 @@ apis:
   humanURL: https://docs.corbado.com/api-reference/backend-api
   baseURL: https://backendapi.corbado.io/v2
   tags:
+  - Connect Tokens
+  tags_raw:
   - ConnectTokens
   properties:
   - type: OpenAPI
@@ -74,6 +76,8 @@ apis:
   humanURL: https://docs.corbado.com/api-reference/backend-api
   baseURL: https://backendapi.corbado.io/v2
   tags:
+  - Export
+  tags_raw:
   - Exports
   properties:
   - type: OpenAPI
@@ -254,6 +258,8 @@ apis:
   humanURL: https://docs.corbado.com/api-reference/backend-api
   baseURL: https://backendapi.corbado.io/v2
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
