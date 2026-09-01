@@ -50,7 +50,7 @@ apis:
   humanURL: https://docs.corbado.com/api-reference/backend-api
   baseURL: https://backendapi.corbado.io/v2
   tags:
-  - ConnectTokens
+  - Connect Tokens
   tags_raw:
   - ConnectTokens
   properties:
