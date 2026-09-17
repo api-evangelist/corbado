@@ -45,44 +45,6 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.23'
 apis:
-- aid: corbado:corbado-connecttokens-api
-  name: Corbado ConnectTokens API
-  description: Short-lived tokens authorizing Corbado Connect frontend flows.
-  humanURL: https://docs.corbado.com/api-reference/backend-api
-  baseURL: https://backendapi.corbado.io/v2
-  tags:
-  - Connect Tokens
-  tags_raw:
-  - ConnectTokens
-  properties:
-  - type: OpenAPI
-    url: openapi/corbado-connecttokens-api-openapi.yml
-  - type: Documentation
-    url: https://docs.corbado.com/api-reference/backend-api
-  - type: APIReference
-    url: https://docs.corbado.com/api-reference/backend-api/users
-  - type: PostmanCollection
-    url: collections/corbado.postman_collection.json
-  - type: OpenCollection
-    url: collections/corbado.opencollection.json
-  - type: Documentation
-    url: https://docs.corbado.com/api-reference/backend-api/identifiers
-  - type: APIReference
-    url: https://docs.corbado.com/api-reference/backend-api/identifiers
-  - type: Documentation
-    url: https://docs.corbado.com/api-reference/backend-api/sessions
-  - type: APIReference
-    url: https://docs.corbado.com/api-reference/backend-api/sessions
-  - type: Documentation
-    url: https://docs.corbado.com/api-reference/backend-api/passkeys
-  - type: APIReference
-    url: https://docs.corbado.com/api-reference/backend-api/passkeys
-  - type: Documentation
-    url: https://docs.corbado.com/api-reference/backend-api/connect-tokens
-  - type: APIReference
-    url: https://docs.corbado.com/api-reference/backend-api/connect-tokens
-  - type: APIReference
-    url: https://docs.corbado.com/api-reference/backend-api
 - aid: corbado:corbado-exports-api
   name: Corbado Exports API
   description: Project data exports and download links.
@@ -277,6 +239,42 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/corbado-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.corbado.com/api-reference/backend-api
+  - type: APIReference
+    url: https://docs.corbado.com/api-reference/backend-api/users
+  - type: PostmanCollection
+    url: collections/corbado.postman_collection.json
+  - type: OpenCollection
+    url: collections/corbado.opencollection.json
+  - type: Documentation
+    url: https://docs.corbado.com/api-reference/backend-api/identifiers
+  - type: APIReference
+    url: https://docs.corbado.com/api-reference/backend-api/identifiers
+  - type: Documentation
+    url: https://docs.corbado.com/api-reference/backend-api/sessions
+  - type: APIReference
+    url: https://docs.corbado.com/api-reference/backend-api/sessions
+  - type: Documentation
+    url: https://docs.corbado.com/api-reference/backend-api/passkeys
+  - type: APIReference
+    url: https://docs.corbado.com/api-reference/backend-api/passkeys
+  - type: Documentation
+    url: https://docs.corbado.com/api-reference/backend-api/connect-tokens
+  - type: APIReference
+    url: https://docs.corbado.com/api-reference/backend-api/connect-tokens
+  - type: APIReference
+    url: https://docs.corbado.com/api-reference/backend-api
+- aid: corbado:corbado-connect-tokens-api
+  name: Corbado Connect Tokens API
+  description: Short-lived tokens authorizing Corbado Connect frontend flows.
+  humanURL: https://docs.corbado.com/api-reference/backend-api
+  baseURL: https://backendapi.corbado.io/v2
+  tags:
+  - Connect Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/corbado-connect-tokens-api-openapi.yml
   - type: Documentation
     url: https://docs.corbado.com/api-reference/backend-api
   - type: APIReference
