@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Corbado Backend ConnectTokens Passkeys API
+  title: Corbado Backend Passkeys API
   description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
   termsOfService: https://www.corbado.com/legal/terms
   contact:
@@ -166,6 +166,40 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
+    PasskeyData:
+      type: object
+      properties:
+        credentialID:
+          type: string
+        userID:
+          type: string
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
+          type: boolean
+        backupState:
+          type: boolean
+        aaguid:
+          type: string
+        created:
+          type: string
+          format: date-time
+    ClientInformation:
+      type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
+      properties:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
+          type: string
+        clientEnvHandle:
+          type: string
+        javaScriptHighEntropy:
+          type: string
     ErrorRsp:
       type: object
       required:
@@ -198,6 +232,22 @@ components:
                     type: string
                   message:
                     type: string
+    PasskeyAppendStartReq:
+      type: object
+      required:
+      - userID
+      properties:
+        userID:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyLoginStartReq:
+      type: object
+      properties:
+        identifierValue:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
     PasskeyVerifySignedDataReq:
       type: object
       required:
@@ -217,47 +267,6 @@ components:
           description: The serialized WebAuthn attestation or assertion response from the browser.
         clientInformation:
           $ref: '#/components/schemas/ClientInformation'
-    PasskeyData:
-      type: object
-      properties:
-        credentialID:
-          type: string
-        userID:
-          type: string
-        attestationType:
-          type: string
-        transports:
-          type: array
-          items:
-            type: string
-        backupEligible:
-          type: boolean
-        backupState:
-          type: boolean
-        aaguid:
-          type: string
-        created:
-          type: string
-          format: date-time
-    PasskeyVerifySignedDataRsp:
-      type: object
-      properties:
-        valid:
-          type: boolean
-        userID:
-          type: string
-    ClientInformation:
-      type: object
-      description: Client/browser context captured for passkey intelligence and risk analysis.
-      properties:
-        bluetoothAvailable:
-          type: boolean
-        userAgent:
-          type: string
-        clientEnvHandle:
-          type: string
-        javaScriptHighEntropy:
-          type: string
     RequestData:
       type: object
       properties:
@@ -265,28 +274,6 @@ components:
           type: string
         link:
           type: string
-    PasskeyAppendStartReq:
-      type: object
-      required:
-      - userID
-      properties:
-        userID:
-          type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
-    PasskeyLoginStartReq:
-      type: object
-      properties:
-        identifierValue:
-          type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
-    PasskeyStartRsp:
-      type: object
-      properties:
-        challenge:
-          type: string
-          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
     PasskeyLoginFinishRsp:
       type: object
       properties:
@@ -294,6 +281,19 @@ components:
           type: string
         passkey:
           $ref: '#/components/schemas/PasskeyData'
+    PasskeyVerifySignedDataRsp:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        userID:
+          type: string
+    PasskeyStartRsp:
+      type: object
+      properties:
+        challenge:
+          type: string
+          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
   responses:
     ErrorRsp:
       description: An error response.

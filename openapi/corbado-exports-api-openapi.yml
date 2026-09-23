@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Corbado Backend ConnectTokens Exports API
+  title: Corbado Backend Exports API
   description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
   termsOfService: https://www.corbado.com/legal/terms
   contact:
@@ -69,6 +69,15 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
+    ExportDownloadLink:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        expiresMs:
+          type: integer
+          format: int64
     ErrorRsp:
       type: object
       required:
@@ -101,22 +110,6 @@ components:
                     type: string
                   message:
                     type: string
-    ExportDownloadLink:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        expiresMs:
-          type: integer
-          format: int64
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
     ExportList:
       type: object
       required:
@@ -135,6 +128,13 @@ components:
               created:
                 type: string
                 format: date-time
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
   responses:
     ErrorRsp:
       description: An error response.

@@ -1,13 +1,7 @@
 {
   "provider": "corbado",
   "sources": [
-    "corbado-connecttokens-api-openapi.yml",
-    "corbado-exports-api-openapi.yml",
-    "corbado-identifiers-api-openapi.yml",
-    "corbado-passkeyevents-api-openapi.yml",
-    "corbado-passkeys-api-openapi.yml",
-    "corbado-sessions-api-openapi.yml",
-    "corbado-users-api-openapi.yml"
+    "_original/corbado-openapi.yml"
   ],
   "outputs": [
     "corbado-connecttokens-api-openapi.yml",
@@ -18,9 +12,24 @@
     "corbado-sessions-api-openapi.yml",
     "corbado-users-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "corbado-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "superseded outputs removed: corbado-connect-tokens-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 7 total)"
+  ],
+  "skipped": [
+    "corbado-connect-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "corbado-exports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "corbado-identifiers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "corbado-passkeyevents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "corbado-passkeys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "corbado-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "corbado-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

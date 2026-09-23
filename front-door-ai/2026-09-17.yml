@@ -1,0 +1,26 @@
+# Front Door AI Index — corbado — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: corbado
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.corbado.com
+  final_host: www.corbado.com
+  ownership: own
+  owner: corbado
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 7
+  host_score: 7
+  density: 6.18
+  words: 1133
+  tiers:
+    agentic: 7
+    core: 0
+    model: 0
+  ambiguous: 5
+  top_terms:
+    prompts: 7
+    intelligence: 5

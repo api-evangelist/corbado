@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Corbado Backend ConnectTokens Sessions API
+  title: Corbado Backend Sessions API
   description: The Corbado Backend API is a server-to-server REST API for the Corbado passkey-first authentication platform. It manages users, login identifiers, sessions, passkeys (WebAuthn credentials), passkey events, Connect tokens, and project data exports. Requests authenticate with HTTP Basic auth using the project ID as username and the API secret as password (both obtained from the Corbado Developer Panel).
   termsOfService: https://www.corbado.com/legal/terms
   contact:
@@ -60,6 +60,19 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
     ErrorRsp:
       type: object
       required:
@@ -92,38 +105,6 @@ components:
                     type: string
                   message:
                     type: string
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-    SessionList:
-      type: object
-      required:
-      - sessions
-      - paging
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Session'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
     Session:
       type: object
       required:
@@ -152,22 +133,26 @@ components:
         totalItems:
           type: integer
           format: int32
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    SessionList:
+      type: object
+      required:
+      - sessions
+      - paging
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Session'
+        paging:
+          $ref: '#/components/schemas/Paging'
   parameters:
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
     Filter:
       name: filter
       in: query
@@ -177,6 +162,21 @@ components:
         type: array
         items:
           type: string
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
     Page:
       name: page
       in: query
