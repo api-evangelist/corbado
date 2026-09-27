@@ -104,19 +104,15 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
-    GenericRsp:
+    IdentifierUpdateReq:
       type: object
       properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
+        status:
           type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
+          enum:
+          - primary
+          - verified
+          - pending
     ErrorRsp:
       type: object
       required:
@@ -149,6 +145,34 @@ components:
                     type: string
                   message:
                     type: string
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    IdentifierCreateReq:
+      type: object
+      required:
+      - identifierType
+      - identifierValue
+      - status
+      properties:
+        identifierType:
+          type: string
+          enum:
+          - email
+          - phone
+          - username
+        identifierValue:
+          type: string
+        status:
+          type: string
+          enum:
+          - primary
+          - verified
+          - pending
     IdentifierList:
       type: object
       required:
@@ -161,6 +185,31 @@ components:
             $ref: '#/components/schemas/Identifier'
         paging:
           $ref: '#/components/schemas/Paging'
+    Paging:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
     Identifier:
       type: object
       required:
@@ -193,56 +242,22 @@ components:
         created:
           type: string
           format: date-time
-    Paging:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
-    IdentifierCreateReq:
-      type: object
-      required:
-      - identifierType
-      - identifierValue
-      - status
-      properties:
-        identifierType:
-          type: string
-          enum:
-          - email
-          - phone
-          - username
-        identifierValue:
-          type: string
-        status:
-          type: string
-          enum:
-          - primary
-          - verified
-          - pending
-    IdentifierUpdateReq:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - primary
-          - verified
-          - pending
   parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    UserID:
+      name: userID
+      in: path
+      required: true
+      description: The Corbado user ID (e.g. usr-4693224802260150919).
+      schema:
+        type: string
     Filter:
       name: filter
       in: query
@@ -252,28 +267,6 @@ components:
         type: array
         items:
           type: string
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
-    UserID:
-      name: userID
-      in: path
-      required: true
-      description: The Corbado user ID (e.g. usr-4693224802260150919).
-      schema:
-        type: string
     Page:
       name: page
       in: query
@@ -282,6 +275,13 @@ components:
         type: integer
         format: int32
         default: 1
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
   responses:
     ErrorRsp:
       description: An error response.

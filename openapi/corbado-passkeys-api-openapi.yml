@@ -166,39 +166,26 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
-    PasskeyData:
+    PasskeyLoginFinishRsp:
       type: object
       properties:
-        credentialID:
-          type: string
         userID:
           type: string
-        attestationType:
-          type: string
-        transports:
-          type: array
-          items:
-            type: string
-        backupEligible:
-          type: boolean
-        backupState:
-          type: boolean
-        aaguid:
-          type: string
-        created:
-          type: string
-          format: date-time
-    ClientInformation:
+        passkey:
+          $ref: '#/components/schemas/PasskeyData'
+    PasskeyLoginStartReq:
       type: object
-      description: Client/browser context captured for passkey intelligence and risk analysis.
       properties:
-        bluetoothAvailable:
+        identifierValue:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyVerifySignedDataRsp:
+      type: object
+      properties:
+        valid:
           type: boolean
-        userAgent:
-          type: string
-        clientEnvHandle:
-          type: string
-        javaScriptHighEntropy:
+        userID:
           type: string
     ErrorRsp:
       type: object
@@ -232,22 +219,31 @@ components:
                     type: string
                   message:
                     type: string
-    PasskeyAppendStartReq:
-      type: object
-      required:
-      - userID
-      properties:
-        userID:
-          type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
-    PasskeyLoginStartReq:
+    PasskeyStartRsp:
       type: object
       properties:
-        identifierValue:
+        challenge:
           type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
+          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    ClientInformation:
+      type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
+      properties:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
+          type: string
+        clientEnvHandle:
+          type: string
+        javaScriptHighEntropy:
+          type: string
     PasskeyVerifySignedDataReq:
       type: object
       required:
@@ -267,33 +263,37 @@ components:
           description: The serialized WebAuthn attestation or assertion response from the browser.
         clientInformation:
           $ref: '#/components/schemas/ClientInformation'
-    RequestData:
+    PasskeyData:
       type: object
       properties:
-        requestID:
+        credentialID:
           type: string
-        link:
-          type: string
-    PasskeyLoginFinishRsp:
-      type: object
-      properties:
         userID:
           type: string
-        passkey:
-          $ref: '#/components/schemas/PasskeyData'
-    PasskeyVerifySignedDataRsp:
-      type: object
-      properties:
-        valid:
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
           type: boolean
+        backupState:
+          type: boolean
+        aaguid:
+          type: string
+        created:
+          type: string
+          format: date-time
+    PasskeyAppendStartReq:
+      type: object
+      required:
+      - userID
+      properties:
         userID:
           type: string
-    PasskeyStartRsp:
-      type: object
-      properties:
-        challenge:
-          type: string
-          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
   responses:
     ErrorRsp:
       description: An error response.

@@ -69,15 +69,24 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
-    ExportDownloadLink:
+    ExportList:
       type: object
+      required:
+      - exports
       properties:
-        url:
-          type: string
-          format: uri
-        expiresMs:
-          type: integer
-          format: int64
+        exports:
+          type: array
+          items:
+            type: object
+            properties:
+              filename:
+                type: string
+              sizeBytes:
+                type: integer
+                format: int64
+              created:
+                type: string
+                format: date-time
     ErrorRsp:
       type: object
       required:
@@ -110,24 +119,6 @@ components:
                     type: string
                   message:
                     type: string
-    ExportList:
-      type: object
-      required:
-      - exports
-      properties:
-        exports:
-          type: array
-          items:
-            type: object
-            properties:
-              filename:
-                type: string
-              sizeBytes:
-                type: integer
-                format: int64
-              created:
-                type: string
-                format: date-time
     RequestData:
       type: object
       properties:
@@ -135,6 +126,15 @@ components:
           type: string
         link:
           type: string
+    ExportDownloadLink:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        expiresMs:
+          type: integer
+          format: int64
   responses:
     ErrorRsp:
       description: An error response.

@@ -59,20 +59,56 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  schemas:
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
           type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
+  schemas:
+    Session:
+      type: object
+      required:
+      - sessionID
+      - userID
+      properties:
+        sessionID:
+          type: string
+        userID:
+          type: string
+        expiresMs:
+          type: integer
+          format: int64
+        created:
+          type: string
+          format: date-time
     ErrorRsp:
       type: object
       required:
@@ -105,22 +141,13 @@ components:
                     type: string
                   message:
                     type: string
-    Session:
+    RequestData:
       type: object
-      required:
-      - sessionID
-      - userID
       properties:
-        sessionID:
+        requestID:
           type: string
-        userID:
+        link:
           type: string
-        expiresMs:
-          type: integer
-          format: int64
-        created:
-          type: string
-          format: date-time
     Paging:
       type: object
       properties:
@@ -133,13 +160,6 @@ components:
         totalItems:
           type: integer
           format: int32
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
     SessionList:
       type: object
       required:
@@ -152,39 +172,19 @@ components:
             $ref: '#/components/schemas/Session'
         paging:
           $ref: '#/components/schemas/Paging'
-  parameters:
-    Filter:
-      name: filter
-      in: query
-      required: false
-      description: Repeatable filter expressions, e.g. status:eq:active.
-      schema:
-        type: array
-        items:
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
           type: string
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 1
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
   responses:
     ErrorRsp:
       description: An error response.

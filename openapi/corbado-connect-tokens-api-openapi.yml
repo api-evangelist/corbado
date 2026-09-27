@@ -100,19 +100,18 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
-    GenericRsp:
+    ConnectTokenList:
       type: object
+      required:
+      - connectTokens
+      - paging
       properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
+        connectTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectToken'
+        paging:
+          $ref: '#/components/schemas/Paging'
     ErrorRsp:
       type: object
       required:
@@ -145,6 +144,13 @@ components:
                     type: string
                   message:
                     type: string
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
     ConnectToken:
       type: object
       required:
@@ -169,42 +175,6 @@ components:
         created:
           type: string
           format: date-time
-    Paging:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
-    ConnectTokenList:
-      type: object
-      required:
-      - connectTokens
-      - paging
-      properties:
-        connectTokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConnectToken'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    ConnectTokenUpdateReq:
-      type: object
-      properties:
-        status:
-          type: string
     ConnectTokenCreateReq:
       type: object
       required:
@@ -221,7 +191,45 @@ components:
         data:
           type: string
           description: Opaque application-specific data carried with the token.
+    ConnectTokenUpdateReq:
+      type: object
+      properties:
+        status:
+          type: string
+    Paging:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
   parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
     Filter:
       name: filter
       in: query
@@ -239,14 +247,6 @@ components:
         type: integer
         format: int32
         default: 1
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
     Sort:
       name: sort
       in: query
