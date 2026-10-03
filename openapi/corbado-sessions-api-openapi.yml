@@ -59,6 +59,13 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   parameters:
     PageSize:
       name: pageSize
@@ -77,6 +84,13 @@ components:
         type: array
         items:
           type: string
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
     Page:
       name: page
       in: query
@@ -85,14 +99,26 @@ components:
         type: integer
         format: int32
         default: 1
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
   schemas:
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    SessionList:
+      type: object
+      required:
+      - sessions
+      - paging
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Session'
+        paging:
+          $ref: '#/components/schemas/Paging'
     Session:
       type: object
       required:
@@ -109,6 +135,19 @@ components:
         created:
           type: string
           format: date-time
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
     ErrorRsp:
       type: object
       required:
@@ -141,13 +180,6 @@ components:
                     type: string
                   message:
                     type: string
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
     Paging:
       type: object
       properties:
@@ -160,38 +192,6 @@ components:
         totalItems:
           type: integer
           format: int32
-    SessionList:
-      type: object
-      required:
-      - sessions
-      - paging
-      properties:
-        sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Session'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

@@ -103,7 +103,118 @@ paths:
         '401':
           $ref: '#/components/responses/ErrorRsp'
 components:
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    UserID:
+      name: userID
+      in: path
+      required: true
+      description: The Corbado user ID (e.g. usr-4693224802260150919).
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
+          type: string
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
   schemas:
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    IdentifierList:
+      type: object
+      required:
+      - identifiers
+      - paging
+      properties:
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Identifier:
+      type: object
+      required:
+      - identifierID
+      - userID
+      - identifierType
+      - identifierValue
+      - status
+      properties:
+        identifierID:
+          type: string
+          example: emai-2398470283402934
+        userID:
+          type: string
+        identifierType:
+          type: string
+          enum:
+          - email
+          - phone
+          - username
+        identifierValue:
+          type: string
+          example: jane.doe@example.com
+        status:
+          type: string
+          enum:
+          - primary
+          - verified
+          - pending
+        created:
+          type: string
+          format: date-time
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
     IdentifierUpdateReq:
       type: object
       properties:
@@ -145,13 +256,6 @@ components:
                     type: string
                   message:
                     type: string
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
     IdentifierCreateReq:
       type: object
       required:
@@ -173,18 +277,6 @@ components:
           - primary
           - verified
           - pending
-    IdentifierList:
-      type: object
-      required:
-      - identifiers
-      - paging
-      properties:
-        identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-        paging:
-          $ref: '#/components/schemas/Paging'
     Paging:
       type: object
       properties:
@@ -197,98 +289,6 @@ components:
         totalItems:
           type: integer
           format: int32
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-    Identifier:
-      type: object
-      required:
-      - identifierID
-      - userID
-      - identifierType
-      - identifierValue
-      - status
-      properties:
-        identifierID:
-          type: string
-          example: emai-2398470283402934
-        userID:
-          type: string
-        identifierType:
-          type: string
-          enum:
-          - email
-          - phone
-          - username
-        identifierValue:
-          type: string
-          example: jane.doe@example.com
-        status:
-          type: string
-          enum:
-          - primary
-          - verified
-          - pending
-        created:
-          type: string
-          format: date-time
-  parameters:
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-    UserID:
-      name: userID
-      in: path
-      required: true
-      description: The Corbado user ID (e.g. usr-4693224802260150919).
-      schema:
-        type: string
-    Filter:
-      name: filter
-      in: query
-      required: false
-      description: Repeatable filter expressions, e.g. status:eq:active.
-      schema:
-        type: array
-        items:
-          type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 1
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

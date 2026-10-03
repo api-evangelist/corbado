@@ -100,6 +100,71 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
+    ConnectToken:
+      type: object
+      required:
+      - connectTokenID
+      - connectTokenType
+      properties:
+        connectTokenID:
+          type: string
+        connectTokenType:
+          type: string
+          enum:
+          - passkey-append
+          - passkey-delete
+          - passkey-list
+        secret:
+          type: string
+          description: The token secret returned only on creation, passed to the Corbado Connect frontend component.
+        identifierValue:
+          type: string
+        status:
+          type: string
+        created:
+          type: string
+          format: date-time
+    ConnectTokenCreateReq:
+      type: object
+      required:
+      - connectTokenType
+      properties:
+        connectTokenType:
+          type: string
+          enum:
+          - passkey-append
+          - passkey-delete
+          - passkey-list
+        identifierValue:
+          type: string
+        data:
+          type: string
+          description: Opaque application-specific data carried with the token.
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+    ConnectTokenUpdateReq:
+      type: object
+      properties:
+        status:
+          type: string
     ConnectTokenList:
       type: object
       required:
@@ -144,58 +209,6 @@ components:
                     type: string
                   message:
                     type: string
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
-    ConnectToken:
-      type: object
-      required:
-      - connectTokenID
-      - connectTokenType
-      properties:
-        connectTokenID:
-          type: string
-        connectTokenType:
-          type: string
-          enum:
-          - passkey-append
-          - passkey-delete
-          - passkey-list
-        secret:
-          type: string
-          description: The token secret returned only on creation, passed to the Corbado Connect frontend component.
-        identifierValue:
-          type: string
-        status:
-          type: string
-        created:
-          type: string
-          format: date-time
-    ConnectTokenCreateReq:
-      type: object
-      required:
-      - connectTokenType
-      properties:
-        connectTokenType:
-          type: string
-          enum:
-          - passkey-append
-          - passkey-delete
-          - passkey-list
-        identifierValue:
-          type: string
-        data:
-          type: string
-          description: Opaque application-specific data carried with the token.
-    ConnectTokenUpdateReq:
-      type: object
-      properties:
-        status:
-          type: string
     Paging:
       type: object
       properties:
@@ -208,19 +221,13 @@ components:
         totalItems:
           type: integer
           format: int32
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   parameters:
     PageSize:
       name: pageSize
@@ -239,6 +246,13 @@ components:
         type: array
         items:
           type: string
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
     Page:
       name: page
       in: query
@@ -247,20 +261,6 @@ components:
         type: integer
         format: int32
         default: 1
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http
