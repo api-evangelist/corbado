@@ -1,0 +1,53 @@
+slug: corbado
+provider: Corbado
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Passkeys
+  spec_file: corbado-passkeys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: POST /passkey/login/start  passkeyLoginStart  Start passkey login; POST /passkey/append/start  passkeyAppendStart  Start
+    creating passkey
+  reason: Operations register WebAuthn credentials and perform passwordless login ceremonies, which is
+    unambiguously authentication/credential management under Identity & Access Management.
+- tag: Identifiers
+  spec_file: corbado-identifiers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /users/{userID}/identifiers  identifierCreate  Create login identifier
+  reason: Manages per-user login identifiers (email/phone/username) used for authentication, a core Identity
+    & Access Management function rather than customer master data.
+- tag: Users
+  spec_file: corbado-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /users/{userID}/credentials  userCredentialList  List passkeys for user; DELETE /users/{userID}/credentials/{credentialID}  userCredentialDelete  Delete
+    passkey
+  reason: User accounts here are authentication principals whose lifecycle and attached WebAuthn credentials
+    are managed, i.e. identity administration, not customer relationship or master data management.
+- tag: Sessions
+  spec_file: corbado-sessions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /sessions/{sessionID}/revoke  sessionRevoke  Revoke a session
+  reason: Listing and revoking authenticated user sessions is access management (session lifecycle / credential
+    revocation) within IAM.

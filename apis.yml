@@ -306,6 +306,9 @@ apis:
   - type: APIReference
     url: https://docs.corbado.com/api-reference/backend-api
 common:
+- type: CapabilityMap
+  url: capabilities/corbado-capability-edges.yml
+  name: Corbado Business Capability Map
 - type: AgenticAccess
   url: agentic-access/corbado-agentic-access.yml
 - type: TrustCenter
