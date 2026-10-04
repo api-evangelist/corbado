@@ -77,14 +77,19 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   schemas:
+    ClientInformation:
+      type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
+      properties:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
+          type: string
+        clientEnvHandle:
+          type: string
+        javaScriptHighEntropy:
+          type: string
     ErrorRsp:
       type: object
       required:
@@ -117,21 +122,6 @@ components:
                     type: string
                   message:
                     type: string
-    PasskeyEventCreateReq:
-      type: object
-      required:
-      - passkeyEventType
-      properties:
-        passkeyEventType:
-          type: string
-          enum:
-          - login-success
-          - login-error
-          - registration-success
-          - registration-error
-          - login-error-untrusted
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
     RequestData:
       type: object
       properties:
@@ -139,31 +129,15 @@ components:
           type: string
         link:
           type: string
-    ClientInformation:
+    PasskeyEventList:
       type: object
-      description: Client/browser context captured for passkey intelligence and risk analysis.
+      required:
+      - passkeyEvents
       properties:
-        bluetoothAvailable:
-          type: boolean
-        userAgent:
-          type: string
-        clientEnvHandle:
-          type: string
-        javaScriptHighEntropy:
-          type: string
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
+        passkeyEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasskeyEvent'
     PasskeyEvent:
       type: object
       required:
@@ -186,15 +160,34 @@ components:
         created:
           type: string
           format: date-time
-    PasskeyEventList:
+    PasskeyEventCreateReq:
       type: object
       required:
-      - passkeyEvents
+      - passkeyEventType
       properties:
-        passkeyEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/PasskeyEvent'
+        passkeyEventType:
+          type: string
+          enum:
+          - login-success
+          - login-error
+          - registration-success
+          - registration-error
+          - login-error-untrusted
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
   parameters:
     UserID:
       name: userID
@@ -203,6 +196,13 @@ components:
       description: The Corbado user ID (e.g. usr-4693224802260150919).
       schema:
         type: string
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

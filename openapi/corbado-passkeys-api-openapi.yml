@@ -165,65 +165,7 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   schemas:
-    PasskeyVerifySignedDataRsp:
-      type: object
-      properties:
-        valid:
-          type: boolean
-        userID:
-          type: string
-    PasskeyStartRsp:
-      type: object
-      properties:
-        challenge:
-          type: string
-          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
-    PasskeyAppendStartReq:
-      type: object
-      required:
-      - userID
-      properties:
-        userID:
-          type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
-    RequestData:
-      type: object
-      properties:
-        requestID:
-          type: string
-        link:
-          type: string
-    PasskeyData:
-      type: object
-      properties:
-        credentialID:
-          type: string
-        userID:
-          type: string
-        attestationType:
-          type: string
-        transports:
-          type: array
-          items:
-            type: string
-        backupEligible:
-          type: boolean
-        backupState:
-          type: boolean
-        aaguid:
-          type: string
-        created:
-          type: string
-          format: date-time
     ClientInformation:
       type: object
       description: Client/browser context captured for passkey intelligence and risk analysis.
@@ -236,39 +178,12 @@ components:
           type: string
         javaScriptHighEntropy:
           type: string
-    PasskeyLoginFinishRsp:
+    PasskeyStartRsp:
       type: object
       properties:
-        userID:
+        challenge:
           type: string
-        passkey:
-          $ref: '#/components/schemas/PasskeyData'
-    PasskeyVerifySignedDataReq:
-      type: object
-      required:
-      - signedData
-      properties:
-        userID:
-          type: string
-        signedData:
-          type: string
-    PasskeyLoginStartReq:
-      type: object
-      properties:
-        identifierValue:
-          type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
-    PasskeyFinishReq:
-      type: object
-      required:
-      - signedChallenge
-      properties:
-        signedChallenge:
-          type: string
-          description: The serialized WebAuthn attestation or assertion response from the browser.
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
+          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
     ErrorRsp:
       type: object
       required:
@@ -301,6 +216,91 @@ components:
                     type: string
                   message:
                     type: string
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    PasskeyData:
+      type: object
+      properties:
+        credentialID:
+          type: string
+        userID:
+          type: string
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
+          type: boolean
+        backupState:
+          type: boolean
+        aaguid:
+          type: string
+        created:
+          type: string
+          format: date-time
+    PasskeyLoginFinishRsp:
+      type: object
+      properties:
+        userID:
+          type: string
+        passkey:
+          $ref: '#/components/schemas/PasskeyData'
+    PasskeyVerifySignedDataReq:
+      type: object
+      required:
+      - signedData
+      properties:
+        userID:
+          type: string
+        signedData:
+          type: string
+    PasskeyVerifySignedDataRsp:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        userID:
+          type: string
+    PasskeyAppendStartReq:
+      type: object
+      required:
+      - userID
+      properties:
+        userID:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyLoginStartReq:
+      type: object
+      properties:
+        identifierValue:
+          type: string
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+    PasskeyFinishReq:
+      type: object
+      required:
+      - signedChallenge
+      properties:
+        signedChallenge:
+          type: string
+          description: The serialized WebAuthn attestation or assertion response from the browser.
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

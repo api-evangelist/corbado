@@ -150,14 +150,16 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   parameters:
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
+          type: string
     PageSize:
       name: pageSize
       in: query
@@ -166,13 +168,6 @@ components:
         type: integer
         format: int32
         default: 10
-    UserID:
-      name: userID
-      in: path
-      required: true
-      description: The Corbado user ID (e.g. usr-4693224802260150919).
-      schema:
-        type: string
     Page:
       name: page
       in: query
@@ -188,31 +183,26 @@ components:
       description: Field and direction to sort by, e.g. created:desc.
       schema:
         type: string
-    Filter:
-      name: filter
-      in: query
-      required: false
-      description: Repeatable filter expressions, e.g. status:eq:active.
+    UserID:
+      name: userID
+      in: path
+      required: true
+      description: The Corbado user ID (e.g. usr-4693224802260150919).
       schema:
-        type: array
-        items:
-          type: string
+        type: string
   schemas:
-    UserCreateReq:
+    Paging:
       type: object
-      required:
-      - status
       properties:
-        status:
-          type: string
-          enum:
-          - pending
-          - active
-          - disabled
-        fullName:
-          type: string
-        explicitWebauthnID:
-          type: string
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
     RequestData:
       type: object
       properties:
@@ -220,101 +210,6 @@ components:
           type: string
         link:
           type: string
-    UserList:
-      type: object
-      required:
-      - users
-      - paging
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    PasskeyData:
-      type: object
-      properties:
-        credentialID:
-          type: string
-        userID:
-          type: string
-        attestationType:
-          type: string
-        transports:
-          type: array
-          items:
-            type: string
-        backupEligible:
-          type: boolean
-        backupState:
-          type: boolean
-        aaguid:
-          type: string
-        created:
-          type: string
-          format: date-time
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-    UserUpdateReq:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - pending
-          - active
-          - disabled
-        fullName:
-          type: string
-    User:
-      type: object
-      required:
-      - userID
-      - status
-      - updated
-      - updatedMs
-      properties:
-        userID:
-          type: string
-          example: usr-4693224802260150919
-        status:
-          type: string
-          enum:
-          - pending
-          - active
-          - disabled
-        fullName:
-          type: string
-          example: Jane Doe
-        explicitWebauthnID:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        updatedMs:
-          type: integer
-          format: int64
-    CredentialList:
-      type: object
-      required:
-      - credentials
-      properties:
-        credentials:
-          type: array
-          items:
-            $ref: '#/components/schemas/PasskeyData'
     ErrorRsp:
       type: object
       required:
@@ -347,18 +242,123 @@ components:
                     type: string
                   message:
                     type: string
-    Paging:
+    User:
+      type: object
+      required:
+      - userID
+      - status
+      - updated
+      - updatedMs
+      properties:
+        userID:
+          type: string
+          example: usr-4693224802260150919
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - disabled
+        fullName:
+          type: string
+          example: Jane Doe
+        explicitWebauthnID:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        updatedMs:
+          type: integer
+          format: int64
+    PasskeyData:
       type: object
       properties:
-        page:
+        credentialID:
+          type: string
+        userID:
+          type: string
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
+          type: boolean
+        backupState:
+          type: boolean
+        aaguid:
+          type: string
+        created:
+          type: string
+          format: date-time
+    UserList:
+      type: object
+      required:
+      - users
+      - paging
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    UserCreateReq:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - disabled
+        fullName:
+          type: string
+        explicitWebauthnID:
+          type: string
+    CredentialList:
+      type: object
+      required:
+      - credentials
+      properties:
+        credentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasskeyData'
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
           type: integer
           format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+    UserUpdateReq:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - disabled
+        fullName:
+          type: string
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

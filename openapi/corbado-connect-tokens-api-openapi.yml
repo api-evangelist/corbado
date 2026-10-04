@@ -99,47 +99,52 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
+  parameters:
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
+          type: string
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
   schemas:
-    ConnectToken:
+    Paging:
       type: object
-      required:
-      - connectTokenID
-      - connectTokenType
       properties:
-        connectTokenID:
-          type: string
-        connectTokenType:
-          type: string
-          enum:
-          - passkey-append
-          - passkey-delete
-          - passkey-list
-        secret:
-          type: string
-          description: The token secret returned only on creation, passed to the Corbado Connect frontend component.
-        identifierValue:
-          type: string
-        status:
-          type: string
-        created:
-          type: string
-          format: date-time
-    ConnectTokenCreateReq:
-      type: object
-      required:
-      - connectTokenType
-      properties:
-        connectTokenType:
-          type: string
-          enum:
-          - passkey-append
-          - passkey-delete
-          - passkey-list
-        identifierValue:
-          type: string
-        data:
-          type: string
-          description: Opaque application-specific data carried with the token.
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
     RequestData:
       type: object
       properties:
@@ -147,36 +152,6 @@ components:
           type: string
         link:
           type: string
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-    ConnectTokenUpdateReq:
-      type: object
-      properties:
-        status:
-          type: string
-    ConnectTokenList:
-      type: object
-      required:
-      - connectTokens
-      - paging
-      properties:
-        connectTokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConnectToken'
-        paging:
-          $ref: '#/components/schemas/Paging'
     ErrorRsp:
       type: object
       required:
@@ -209,18 +184,76 @@ components:
                     type: string
                   message:
                     type: string
-    Paging:
+    ConnectTokenCreateReq:
+      type: object
+      required:
+      - connectTokenType
+      properties:
+        connectTokenType:
+          type: string
+          enum:
+          - passkey-append
+          - passkey-delete
+          - passkey-list
+        identifierValue:
+          type: string
+        data:
+          type: string
+          description: Opaque application-specific data carried with the token.
+    ConnectToken:
+      type: object
+      required:
+      - connectTokenID
+      - connectTokenType
+      properties:
+        connectTokenID:
+          type: string
+        connectTokenType:
+          type: string
+          enum:
+          - passkey-append
+          - passkey-delete
+          - passkey-list
+        secret:
+          type: string
+          description: The token secret returned only on creation, passed to the Corbado Connect frontend component.
+        identifierValue:
+          type: string
+        status:
+          type: string
+        created:
+          type: string
+          format: date-time
+    ConnectTokenList:
+      type: object
+      required:
+      - connectTokens
+      - paging
+      properties:
+        connectTokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectToken'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    ConnectTokenUpdateReq:
       type: object
       properties:
-        page:
+        status:
+          type: string
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
           type: integer
           format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
   responses:
     ErrorRsp:
       description: An error response.
@@ -228,39 +261,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorRsp'
-  parameters:
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-    Filter:
-      name: filter
-      in: query
-      required: false
-      description: Repeatable filter expressions, e.g. status:eq:active.
-      schema:
-        type: array
-        items:
-          type: string
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 1
   securitySchemes:
     basicAuth:
       type: http

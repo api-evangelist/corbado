@@ -59,22 +59,7 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   parameters:
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
     Filter:
       name: filter
       in: query
@@ -84,13 +69,14 @@ components:
         type: array
         items:
           type: string
-    Sort:
-      name: sort
+    PageSize:
+      name: pageSize
       in: query
       required: false
-      description: Field and direction to sort by, e.g. created:desc.
       schema:
-        type: string
+        type: integer
+        format: int32
+        default: 10
     Page:
       name: page
       in: query
@@ -99,7 +85,58 @@ components:
         type: integer
         format: int32
         default: 1
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
   schemas:
+    Paging:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
+    ErrorRsp:
+      type: object
+      required:
+      - httpStatusCode
+      - message
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            details:
+              type: string
+            validation:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
     RequestData:
       type: object
       properties:
@@ -148,50 +185,13 @@ components:
         runtime:
           type: number
           format: float
+  responses:
     ErrorRsp:
-      type: object
-      required:
-      - httpStatusCode
-      - message
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-        error:
-          type: object
-          properties:
-            type:
-              type: string
-            details:
-              type: string
-            validation:
-              type: array
-              items:
-                type: object
-                properties:
-                  field:
-                    type: string
-                  message:
-                    type: string
-    Paging:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

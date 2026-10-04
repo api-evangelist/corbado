@@ -68,13 +68,6 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   schemas:
     ExportDownloadLink:
       type: object
@@ -92,24 +85,6 @@ components:
           type: string
         link:
           type: string
-    ExportList:
-      type: object
-      required:
-      - exports
-      properties:
-        exports:
-          type: array
-          items:
-            type: object
-            properties:
-              filename:
-                type: string
-              sizeBytes:
-                type: integer
-                format: int64
-              created:
-                type: string
-                format: date-time
     ErrorRsp:
       type: object
       required:
@@ -142,6 +117,31 @@ components:
                     type: string
                   message:
                     type: string
+    ExportList:
+      type: object
+      required:
+      - exports
+      properties:
+        exports:
+          type: array
+          items:
+            type: object
+            properties:
+              filename:
+                type: string
+              sizeBytes:
+                type: integer
+                format: int64
+              created:
+                type: string
+                format: date-time
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http

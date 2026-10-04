@@ -103,29 +103,7 @@ paths:
         '401':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  responses:
-    ErrorRsp:
-      description: An error response.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorRsp'
   parameters:
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-    UserID:
-      name: userID
-      in: path
-      required: true
-      description: The Corbado user ID (e.g. usr-4693224802260150919).
-      schema:
-        type: string
     Filter:
       name: filter
       in: query
@@ -135,13 +113,14 @@ components:
         type: array
         items:
           type: string
-    Sort:
-      name: sort
+    PageSize:
+      name: pageSize
       in: query
       required: false
-      description: Field and direction to sort by, e.g. created:desc.
       schema:
-        type: string
+        type: integer
+        format: int32
+        default: 10
     Page:
       name: page
       in: query
@@ -150,7 +129,33 @@ components:
         type: integer
         format: int32
         default: 1
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
+    UserID:
+      name: userID
+      in: path
+      required: true
+      description: The Corbado user ID (e.g. usr-4693224802260150919).
+      schema:
+        type: string
   schemas:
+    Paging:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
     RequestData:
       type: object
       properties:
@@ -158,72 +163,6 @@ components:
           type: string
         link:
           type: string
-    IdentifierList:
-      type: object
-      required:
-      - identifiers
-      - paging
-      properties:
-        identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    Identifier:
-      type: object
-      required:
-      - identifierID
-      - userID
-      - identifierType
-      - identifierValue
-      - status
-      properties:
-        identifierID:
-          type: string
-          example: emai-2398470283402934
-        userID:
-          type: string
-        identifierType:
-          type: string
-          enum:
-          - email
-          - phone
-          - username
-        identifierValue:
-          type: string
-          example: jane.doe@example.com
-        status:
-          type: string
-          enum:
-          - primary
-          - verified
-          - pending
-        created:
-          type: string
-          format: date-time
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
-    IdentifierUpdateReq:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - primary
-          - verified
-          - pending
     ErrorRsp:
       type: object
       required:
@@ -256,6 +195,27 @@ components:
                     type: string
                   message:
                     type: string
+    IdentifierUpdateReq:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - primary
+          - verified
+          - pending
+    IdentifierList:
+      type: object
+      required:
+      - identifiers
+      - paging
+      properties:
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        paging:
+          $ref: '#/components/schemas/Paging'
     IdentifierCreateReq:
       type: object
       required:
@@ -277,18 +237,58 @@ components:
           - primary
           - verified
           - pending
-    Paging:
+    GenericRsp:
       type: object
       properties:
-        page:
+        httpStatusCode:
           type: integer
           format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
+    Identifier:
+      type: object
+      required:
+      - identifierID
+      - userID
+      - identifierType
+      - identifierValue
+      - status
+      properties:
+        identifierID:
+          type: string
+          example: emai-2398470283402934
+        userID:
+          type: string
+        identifierType:
+          type: string
+          enum:
+          - email
+          - phone
+          - username
+        identifierValue:
+          type: string
+          example: jane.doe@example.com
+        status:
+          type: string
+          enum:
+          - primary
+          - verified
+          - pending
+        created:
+          type: string
+          format: date-time
+  responses:
+    ErrorRsp:
+      description: An error response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorRsp'
   securitySchemes:
     basicAuth:
       type: http
