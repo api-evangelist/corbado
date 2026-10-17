@@ -59,52 +59,23 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorRsp'
 components:
-  parameters:
-    Filter:
-      name: filter
-      in: query
-      required: false
-      description: Repeatable filter expressions, e.g. status:eq:active.
-      schema:
-        type: array
-        items:
-          type: string
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 1
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: Field and direction to sort by, e.g. created:desc.
-      schema:
-        type: string
   schemas:
-    Paging:
+    Session:
       type: object
+      required:
+      - sessionID
+      - userID
       properties:
-        page:
+        sessionID:
+          type: string
+        userID:
+          type: string
+        expiresMs:
           type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int32
+          format: int64
+        created:
+          type: string
+          format: date-time
     ErrorRsp:
       type: object
       required:
@@ -156,22 +127,18 @@ components:
             $ref: '#/components/schemas/Session'
         paging:
           $ref: '#/components/schemas/Paging'
-    Session:
+    Paging:
       type: object
-      required:
-      - sessionID
-      - userID
       properties:
-        sessionID:
-          type: string
-        userID:
-          type: string
-        expiresMs:
+        page:
           type: integer
-          format: int64
-        created:
-          type: string
-          format: date-time
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int32
     GenericRsp:
       type: object
       properties:
@@ -185,6 +152,39 @@ components:
         runtime:
           type: number
           format: float
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: Field and direction to sort by, e.g. created:desc.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      required: false
+      description: Repeatable filter expressions, e.g. status:eq:active.
+      schema:
+        type: array
+        items:
+          type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
   responses:
     ErrorRsp:
       description: An error response.

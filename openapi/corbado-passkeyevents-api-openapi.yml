@@ -78,18 +78,6 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
-    ClientInformation:
-      type: object
-      description: Client/browser context captured for passkey intelligence and risk analysis.
-      properties:
-        bluetoothAvailable:
-          type: boolean
-        userAgent:
-          type: string
-        clientEnvHandle:
-          type: string
-        javaScriptHighEntropy:
-          type: string
     ErrorRsp:
       type: object
       required:
@@ -122,22 +110,18 @@ components:
                     type: string
                   message:
                     type: string
-    RequestData:
+    ClientInformation:
       type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
       properties:
-        requestID:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
           type: string
-        link:
+        clientEnvHandle:
           type: string
-    PasskeyEventList:
-      type: object
-      required:
-      - passkeyEvents
-      properties:
-        passkeyEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/PasskeyEvent'
+        javaScriptHighEntropy:
+          type: string
     PasskeyEvent:
       type: object
       required:
@@ -160,6 +144,35 @@ components:
         created:
           type: string
           format: date-time
+    PasskeyEventList:
+      type: object
+      required:
+      - passkeyEvents
+      properties:
+        passkeyEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasskeyEvent'
+    RequestData:
+      type: object
+      properties:
+        requestID:
+          type: string
+        link:
+          type: string
+    GenericRsp:
+      type: object
+      properties:
+        httpStatusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        requestData:
+          $ref: '#/components/schemas/RequestData'
+        runtime:
+          type: number
+          format: float
     PasskeyEventCreateReq:
       type: object
       required:
@@ -175,19 +188,6 @@ components:
           - login-error-untrusted
         clientInformation:
           $ref: '#/components/schemas/ClientInformation'
-    GenericRsp:
-      type: object
-      properties:
-        httpStatusCode:
-          type: integer
-          format: int32
-        message:
-          type: string
-        requestData:
-          $ref: '#/components/schemas/RequestData'
-        runtime:
-          type: number
-          format: float
   parameters:
     UserID:
       name: userID

@@ -166,24 +166,35 @@ paths:
           $ref: '#/components/responses/ErrorRsp'
 components:
   schemas:
-    ClientInformation:
+    PasskeyData:
       type: object
-      description: Client/browser context captured for passkey intelligence and risk analysis.
       properties:
-        bluetoothAvailable:
+        credentialID:
+          type: string
+        userID:
+          type: string
+        attestationType:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+        backupEligible:
           type: boolean
-        userAgent:
+        backupState:
+          type: boolean
+        aaguid:
           type: string
-        clientEnvHandle:
+        created:
           type: string
-        javaScriptHighEntropy:
-          type: string
-    PasskeyStartRsp:
+          format: date-time
+    PasskeyLoginStartReq:
       type: object
       properties:
-        challenge:
+        identifierValue:
           type: string
-          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
     ErrorRsp:
       type: object
       required:
@@ -216,6 +227,18 @@ components:
                     type: string
                   message:
                     type: string
+    ClientInformation:
+      type: object
+      description: Client/browser context captured for passkey intelligence and risk analysis.
+      properties:
+        bluetoothAvailable:
+          type: boolean
+        userAgent:
+          type: string
+        clientEnvHandle:
+          type: string
+        javaScriptHighEntropy:
+          type: string
     RequestData:
       type: object
       properties:
@@ -223,28 +246,12 @@ components:
           type: string
         link:
           type: string
-    PasskeyData:
+    PasskeyStartRsp:
       type: object
       properties:
-        credentialID:
+        challenge:
           type: string
-        userID:
-          type: string
-        attestationType:
-          type: string
-        transports:
-          type: array
-          items:
-            type: string
-        backupEligible:
-          type: boolean
-        backupState:
-          type: boolean
-        aaguid:
-          type: string
-        created:
-          type: string
-          format: date-time
+          description: The serialized PublicKeyCredentialCreationOptions or PublicKeyCredentialRequestOptions JSON.
     PasskeyLoginFinishRsp:
       type: object
       properties:
@@ -252,15 +259,16 @@ components:
           type: string
         passkey:
           $ref: '#/components/schemas/PasskeyData'
-    PasskeyVerifySignedDataReq:
+    PasskeyFinishReq:
       type: object
       required:
-      - signedData
+      - signedChallenge
       properties:
-        userID:
+        signedChallenge:
           type: string
-        signedData:
-          type: string
+          description: The serialized WebAuthn attestation or assertion response from the browser.
+        clientInformation:
+          $ref: '#/components/schemas/ClientInformation'
     PasskeyVerifySignedDataRsp:
       type: object
       properties:
@@ -277,23 +285,15 @@ components:
           type: string
         clientInformation:
           $ref: '#/components/schemas/ClientInformation'
-    PasskeyLoginStartReq:
-      type: object
-      properties:
-        identifierValue:
-          type: string
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
-    PasskeyFinishReq:
+    PasskeyVerifySignedDataReq:
       type: object
       required:
-      - signedChallenge
+      - signedData
       properties:
-        signedChallenge:
+        userID:
           type: string
-          description: The serialized WebAuthn attestation or assertion response from the browser.
-        clientInformation:
-          $ref: '#/components/schemas/ClientInformation'
+        signedData:
+          type: string
   responses:
     ErrorRsp:
       description: An error response.
