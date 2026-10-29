@@ -1,4 +1,4 @@
-# Corbado (corbado)
+# Corbado
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,162 +66,130 @@
 
 Corbado is a passkey-first authentication platform that helps companies add WebAuthn passkeys to their products. The Corbado Backend API manages users, login identifiers, sessions, passkeys/credentials, and connect tokens, while passkey intelligence and analytics surface readiness, adoption, and per-user debugging for passwordless rollouts.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/corbado/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/corbado/refs/heads/main/apis.yml)
+**Areas:** Authentication · Passkeys · WebAuthn · Passwordless · CIAM · Identity
 
-## Tags
+## Corbado on APIs.io
 
-- Authentication
-- Passkeys
-- WebAuthn
-- Passwordless
-- CIAM
-- Identity
+Everything profiled for Corbado is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/corbado/](https://apis.io/providers/corbado/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Corbado Exports API](https://apis.io/apis/corbado/corbado-exports-api/) — Project data exports and download links.
+- [Corbado Identifiers API](https://apis.io/apis/corbado/corbado-identifiers-api/) — Manage login identifiers (email, phone, username) attached to a user.
+- [Corbado PasskeyEvents API](https://apis.io/apis/corbado/corbado-passkeyevents-api/) — Record and query passkey lifecycle events for a user.
+- [Corbado Passkeys API](https://apis.io/apis/corbado/corbado-passkeys-api/) — WebAuthn passkey registration and login ceremonies and verification.
+- [Corbado Sessions API](https://apis.io/apis/corbado/corbado-sessions-api/) — List and revoke authenticated sessions.
+- [Corbado Users API](https://apis.io/apis/corbado/corbado-users-api/) — Create and manage end users and their social logins and credentials.
+- [Corbado Connect Tokens API](https://apis.io/apis/corbado/corbado-connect-tokens-api/) — Short-lived tokens authorizing Corbado Connect frontend flows.
 
-## APIs
+### Published properties
 
-### Corbado Users API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, list, retrieve, update, and delete end users, plus manage their social logins and credentials, in the Corbado Backend API.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.corbado.com/api-reference/backend-api](https://docs.corbado.com/api-reference/backend-api)
-- **Base URL:** `https://backendapi.corbado.io/v2`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Corbado Agentic Access](https://apis.io/agentic-access/corbado/corbado-agentic-access/)
 
-- Users
-- Identity
-- CIAM
+#### Collections (8)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.corbado.com/api-reference/backend-api)
-- [API Reference](https://docs.corbado.com/api-reference/backend-api/users)
-- [OpenAPI](openapi/corbado-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/corbado.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/corbado.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Corbado Backend API](https://apis.io/collections/corbado/open-corbado/)
+- [Corbado Backend ConnectTokens API](https://apis.io/collections/corbado/open-corbado-connecttokens-api/)
+- [Corbado Backend ConnectTokens Exports API](https://apis.io/collections/corbado/open-corbado-exports-api/)
+- [Corbado Backend ConnectTokens Identifiers API](https://apis.io/collections/corbado/open-corbado-identifiers-api/)
+- [Corbado Backend ConnectTokens PasskeyEvents API](https://apis.io/collections/corbado/open-corbado-passkeyevents-api/)
+- [Corbado Backend ConnectTokens Passkeys API](https://apis.io/collections/corbado/open-corbado-passkeys-api/)
+- [Corbado Backend ConnectTokens Sessions API](https://apis.io/collections/corbado/open-corbado-sessions-api/)
+- [Corbado Backend ConnectTokens Users API](https://apis.io/collections/corbado/open-corbado-users-api/)
 
-### Corbado Identifiers API
+#### Security (4)
 
-Manage login identifiers (email, phone, username) attached to a user, including create, update, delete, and list operations across the project.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.corbado.com/api-reference/backend-api](https://docs.corbado.com/api-reference/backend-api)
-- **Base URL:** `https://backendapi.corbado.io/v2`
+- [Corbado Authentication](https://apis.io/security/corbado/corbado-authentication/)
+- [Corbado Domain Security](https://apis.io/security/corbado/corbado-domain-security/)
+- [Corbado Trust Center](https://apis.io/security/corbado/corbado-trust-center/)
+- [Corbado Vulnerability Disclosure](https://apis.io/security/corbado/corbado-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Identifiers
-- Email
-- Phone
-- Username
+Published plans, tiers and prices.
 
-#### Properties
+- [Corbado Plans Pricing](https://apis.io/plans/corbado/corbado-plans-pricing/)
 
-- [Documentation](https://docs.corbado.com/api-reference/backend-api/identifiers)
-- [API Reference](https://docs.corbado.com/api-reference/backend-api/identifiers)
-- [OpenAPI](openapi/corbado-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/corbado.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/corbado.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Corbado Sessions API
+Published request limits.
 
-List active authentication sessions and revoke individual sessions to terminate a user's authenticated state server-side.
+- [Corbado Rate Limits](https://apis.io/rate-limits/corbado/corbado-rate-limits/)
 
-- **Human URL:** [https://docs.corbado.com/api-reference/backend-api](https://docs.corbado.com/api-reference/backend-api)
-- **Base URL:** `https://backendapi.corbado.io/v2`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Sessions
-- JWT
-- Authentication
+- [Corbado Finops](https://apis.io/finops/corbado/corbado-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.corbado.com/api-reference/backend-api/sessions)
-- [API Reference](https://docs.corbado.com/api-reference/backend-api/sessions)
-- [OpenAPI](openapi/corbado-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/corbado.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/corbado.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Corbado Passkeys API
-
-WebAuthn passkey ceremonies - append (registration) and login start/finish, conditional UI mediation, signed-data verification - plus listing and deleting a user's passkey credentials.
-
-- **Human URL:** [https://docs.corbado.com/api-reference/backend-api](https://docs.corbado.com/api-reference/backend-api)
-- **Base URL:** `https://backendapi.corbado.io/v2`
-
-#### Tags
-
-- Passkeys
-- WebAuthn
-- Credentials
-
-#### Properties
-
-- [Documentation](https://docs.corbado.com/api-reference/backend-api/passkeys)
-- [API Reference](https://docs.corbado.com/api-reference/backend-api/passkeys)
-- [OpenAPI](openapi/corbado-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/corbado.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/corbado.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Corbado Connect Tokens API
-
-Create, list, update, and delete short-lived Connect tokens that authorize Corbado Connect frontend passkey management flows on behalf of a known user.
-
-- **Human URL:** [https://docs.corbado.com/api-reference/backend-api](https://docs.corbado.com/api-reference/backend-api)
-- **Base URL:** `https://backendapi.corbado.io/v2`
-
-#### Tags
-
-- Connect Tokens
-- Auth Tokens
-- Corbado Connect
-
-#### Properties
-
-- [Documentation](https://docs.corbado.com/api-reference/backend-api/connect-tokens)
-- [API Reference](https://docs.corbado.com/api-reference/backend-api/connect-tokens)
-- [OpenAPI](openapi/corbado-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/corbado.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/corbado.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Corbado Projects API
-
-Project-level configuration and data exports, including CNAME configuration and downloadable project exports for users and passkey events.
-
-- **Human URL:** [https://docs.corbado.com/api-reference/backend-api](https://docs.corbado.com/api-reference/backend-api)
-- **Base URL:** `https://backendapi.corbado.io/v2`
-
-#### Tags
-
-- Projects
-- Configuration
-- Exports
-
-#### Properties
-
-- [Documentation](https://docs.corbado.com/api-reference/backend-api)
-- [API Reference](https://docs.corbado.com/api-reference/backend-api)
-- [OpenAPI](openapi/corbado-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/corbado.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/corbado.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/corbado)
-- [LinkedIn](https://www.linkedin.com/company/corbado)
 - [Website](https://www.corbado.com)
 - [Documentation](https://docs.corbado.com)
-- [Plans](plans/corbado-plans-pricing.yml)
-- [Rate Limits](rate-limits/corbado-rate-limits.yml)
-- [Fin Ops](finops/corbado-finops.yml)
+- [Blog](https://www.corbado.com/blog)
+- [GitHub](https://github.com/corbado)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 30.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 15.8 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/corbado/](https://apis.io/providers/corbado/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Corbado: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/corbado/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
